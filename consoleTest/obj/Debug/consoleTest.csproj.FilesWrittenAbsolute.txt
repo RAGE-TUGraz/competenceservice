@@ -1,0 +1,9 @@
+/home/rage/MonoDevelope/webTest/consoleTest/obj/Debug/.NETFramework,Version=v4.5.AssemblyAttribute.cs
+/home/rage/MonoDevelope/webTest/consoleTest/bin/Debug/MySql.Data.dll
+/home/rage/MonoDevelope/webTest/consoleTest/bin/Debug/consoleTest.exe.config
+/home/rage/MonoDevelope/webTest/consoleTest/bin/Debug/consoleTest.exe.mdb
+/home/rage/MonoDevelope/webTest/consoleTest/bin/Debug/consoleTest.exe
+/home/rage/MonoDevelope/webTest/consoleTest/obj/Debug/consoleTest.exe
+/home/rage/MonoDevelope/webTest/consoleTest/obj/Debug/consoleTest.exe.mdb
+/home/rage/MonoDevelope/webTest/consoleTest/bin/Debug/competenceTest.dll
+/home/rage/MonoDevelope/webTest/consoleTest/bin/Debug/competenceTest.dll.mdb
