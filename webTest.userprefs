@@ -1,11 +1,10 @@
 ﻿<Properties StartupItem="Test/Test.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="competenceTest/CompetenceClasses/CompetenceState.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="competenceTest/CompetenceClasses/XMLCompetenceProbabilities.cs">
     <Files>
-      <File FileName="consoleTest/DataBase/DBConnectCompetenceState.cs" Line="142" Column="18" />
-      <File FileName="competenceTest/CompetenceHandler.cs" Line="68" Column="46" />
-      <File FileName="Test/Program.cs" Line="20" Column="49" />
-      <File FileName="competenceTest/CompetenceClasses/CompetenceState.cs" Line="10" Column="17" />
+      <File FileName="consoleTest/DataBase/DBConnectCompetenceState.cs" Line="1" Column="1" />
+      <File FileName="competenceTest/CompetenceHandler.cs" Line="71" Column="1" />
+      <File FileName="competenceTest/CompetenceClasses/XMLCompetenceProbabilities.cs" Line="64" Column="39" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

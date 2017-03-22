@@ -12,7 +12,7 @@ namespace competenceTest
 		/// <summary>
 		/// Dictionary containing the key/value pairs of competences and probability of possession assosiated with the competence
 		/// </summary>
-		Dictionary<Competence, double> pairs = new Dictionary<Competence, double>();
+		public Dictionary<Competence, double> pairs = new Dictionary<Competence, double>();
 
 		/// <summary>
 		/// Limit: Values of CompetenceAssessmentAsset.Handler.transitionProbability and above are assumed to indicate mastery of a competence by a learner 

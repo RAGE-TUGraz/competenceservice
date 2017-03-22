@@ -11,7 +11,7 @@ namespace webTest
 		public webservice()
 		{}
 
-
+		//call: http://192.168.222.156/webTest/webservice.asmx/sum?a=2&b=3
 		[WebMethod]
 		public int sum(int a, int b){
 			return a + b;

@@ -45,6 +45,7 @@
     <Compile Include="CompetenceClasses\ULevel.cs" />
     <Compile Include="CompetenceClasses\UpdateLevelStorage.cs" />
     <Compile Include="CompetenceHandler.cs" />
+    <Compile Include="CompetenceClasses\XMLCompetenceProbabilities.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>

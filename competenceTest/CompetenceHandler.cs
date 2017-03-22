@@ -1,4 +1,5 @@
 ﻿using System;
+using consoleTest;
 
 namespace competenceTest
 {
@@ -64,6 +65,10 @@ namespace competenceTest
 			if ( dmstring == null)
 				return -1;
 			DomainModel dm = DomainModel.getDMFromXmlString (dmstring);
+			CompetenceStructure cstr = new CompetenceStructure (dm);
+			CompetenceState cs = new CompetenceState (cstr);
+			XMLCompetenceProbabilities xmlcs = new XMLCompetenceProbabilities (cs);
+			Logger.Log (xmlcs.toXmlString());
 
 			//create default starting competence state
 
