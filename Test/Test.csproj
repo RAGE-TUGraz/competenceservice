@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?>
+﻿<?xml version="1.0" encoding="utf-8"?>
 <Project DefaultTargets="Build" ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -34,15 +34,15 @@
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <ItemGroup>
-    <ProjectReference Include="..\competenceTest\competenceTest.csproj">
-      <Project>{6EDFEDF8-4C4E-4880-8115-0D2F0C67B04E}</Project>
-      <Name>competenceTest</Name>
+    <ProjectReference Include="..\competenceframework\competenceframework.csproj">
+      <Project>{65d15143-606f-4c36-bbb2-289b1a8d62b1}</Project>
+      <Name>competenceframework</Name>
     </ProjectReference>
-    <ProjectReference Include="..\consoleTest\databaseTest.csproj">
-      <Project>{00971D0A-1734-4312-B1B1-01AE9062F2F2}</Project>
-      <Name>databaseTest</Name>
+    <ProjectReference Include="..\UnitTestCompetenceservice\UnitTestCompetenceservice.csproj">
+      <Project>{3d11fc94-8a44-4e07-a217-f800f4c635ce}</Project>
+      <Name>UnitTestCompetenceservice</Name>
     </ProjectReference>
   </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
 </Project>

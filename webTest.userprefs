@@ -1,10 +1,15 @@
 ﻿<Properties StartupItem="Test/Test.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="competenceTest/CompetenceClasses/XMLCompetenceProbabilities.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="webTest/webservice.asmx.cs">
     <Files>
       <File FileName="consoleTest/DataBase/DBConnectCompetenceState.cs" Line="1" Column="1" />
-      <File FileName="competenceTest/CompetenceHandler.cs" Line="71" Column="1" />
-      <File FileName="competenceTest/CompetenceClasses/XMLCompetenceProbabilities.cs" Line="64" Column="39" />
+      <File FileName="competenceTest/CompetenceHandler.cs" Line="1" Column="1" />
+      <File FileName="competenceTest/CompetenceClasses/XMLCompetenceProbabilities.cs" Line="1" Column="1" />
+      <File FileName="consoleTest/DataBase/DBConnectDomainModel.cs" Line="1" Column="1" />
+      <File FileName="consoleTest/DataBase/DBConnectTrackingId.cs" Line="1" Column="1" />
+      <File FileName="webTest/Default.aspx" Line="20" Column="1" />
+      <File FileName="webTest/webservice.asmx" Line="1" Column="1" />
+      <File FileName="webTest/webservice.asmx.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

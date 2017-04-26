@@ -1,0 +1,16 @@
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\obj\Debug\Test.csprojResolveAssemblyReference.cache
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\obj\Debug\Test.exe
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\Test.exe
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\Test.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\CBKST.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\MySql.Data.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\CBKST.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\MySql.Data.xml
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\obj\Debug\Test.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\storagedb.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\storagedb.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\competenceframework.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\competenceframework.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\UnitTestCompetenceservice.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\Test\bin\Debug\UnitTestCompetenceservice.pdb

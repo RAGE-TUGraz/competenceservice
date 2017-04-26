@@ -1,6 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
-using competenceTest;
+﻿/*
+  Copyright 2016 TUGraz, http://www.tugraz.at/
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  This project has received funding from the European Union’s Horizon
+  2020 research and innovation programme under grant agreement No 644187.
+  You may obtain a copy of the License at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  
+  This software has been created in the context of the EU-funded RAGE project.
+  Realising and Applied Gaming Eco-System (RAGE), Grant agreement No 644187, 
+  http://rageproject.eu/
+
+  Development was done by Cognitive Science Section (CSS) 
+  at Knowledge Technologies Institute (KTI)at Graz University of Technology (TUGraz).
+  http://kti.tugraz.at/css/
+
+  Created by: Matthias Maurer, TUGraz <mmaurer@tugraz.at>
+*/
+
+using System;
+using UnitTestCompetenceservice;
 
 namespace Test
 {
@@ -8,41 +35,11 @@ namespace Test
 	{
 		public static void Main (string[] args)
 		{
-			DBConnectDomainModel dbc = new DBConnectDomainModel ();
-			dbc.dropTable ();
-			dbc.createTable ();
-			dbc.enterTestData ();
+            TestCases tc = new TestCases();
+            tc.Initialize();
+            tc.test10();
 
-
-			CompetenceHandler ch = CompetenceHandler.Instance;
-			int tc = ch.requestTrackingcode ("dm1");
-
-			Console.WriteLine ("Requested tracking code: "+tc.ToString());
-
-			/*
-			List<string> list = new List<string>();
-			list.Add ("name='dm1'");
-			string dmstring = dbc.Select (list) [3] [0];
-			Console.WriteLine (dmstring);
-			DomainModel dm = DomainModel.getDMFromXmlString (dmstring);
-			dm.print ();
-			//*/
-
-			/*
-			dbc.Insert ("n1","p1","<es><67>");
-			int b = dbc.Insert ("n2","p2","s2");
-
-			if (b == 1)
-				Console.WriteLine (" not inserted - structure name already exists");
-
-			List<string> list = new List<string>();
-			list.Add ("name='n1'");
-			list.Add ("password='p1'");
-			Console.WriteLine (dbc.Select(list)[3][0]);
-
-			//Console.WriteLine ("Hello World!");
-
-			*/
+            Console.ReadLine();
 		}
 	}
 }

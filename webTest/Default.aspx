@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="webTest.Default" ValidateRequest="false" %>
+﻿<%@ Page Language="C#" Inherits="competenceservice.Default" ValidateRequest="false" %>
 <!DOCTYPE html>
 <html>
 <head runat="server">
@@ -13,10 +13,7 @@
 		<a href="webservice.asmx">webservice</a>
 		-->
 	<a>Enter new domainmodel:</a><br>
-	name:<br>
-	<asp:TextBox id="inputname" runat="server" />
-	<br>  password:<br>
-	<asp:TextBox id="inputpassword" runat="server" />
+
 	<br>
 	structure:<br>
 	<asp:TextBox id="inputstructure" TextMode="MultiLine" runat="server" rows="10" cols="40"/>

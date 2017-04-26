@@ -1,0 +1,11 @@
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\bin\Debug\competenceframework.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\bin\Debug\competenceframework.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\bin\Debug\CBKST.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\bin\Debug\storagedb.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\bin\Debug\MySql.Data.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\bin\Debug\CBKST.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\bin\Debug\storagedb.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\bin\Debug\MySql.Data.xml
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\obj\Debug\competenceframework.csprojResolveAssemblyReference.cache
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\obj\Debug\competenceframework.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\competenceframework\obj\Debug\competenceframework.pdb

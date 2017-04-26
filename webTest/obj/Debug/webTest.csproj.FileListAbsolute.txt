@@ -1,0 +1,11 @@
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\obj\Debug\webTest.csprojResolveAssemblyReference.cache
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\obj\Debug\webTest.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\bin\webTest.dll.config
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\bin\webTest.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\bin\webTest.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\bin\consoleTest.exe
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\bin\MySql.Data.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\bin\consoleTest.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\bin\consoleTest.exe.config
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\bin\MySql.Data.xml
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\webTest\obj\Debug\webTest.pdb

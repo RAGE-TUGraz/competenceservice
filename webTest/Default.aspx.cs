@@ -1,29 +1,49 @@
-﻿using System;
-using System.Web;
-using System.Web.UI;
+﻿/*
+  Copyright 2016 TUGraz, http://www.tugraz.at/
+  
+  Licensed under the Apache License, Version 2.0 (the "License");
+  you may not use this file except in compliance with the License.
+  This project has received funding from the European Union’s Horizon
+  2020 research and innovation programme under grant agreement No 644187.
+  You may obtain a copy of the License at
+  
+      http://www.apache.org/licenses/LICENSE-2.0
+  
+  Unless required by applicable law or agreed to in writing, software
+  distributed under the License is distributed on an "AS IS" BASIS,
+  WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+  See the License for the specific language governing permissions and
+  limitations under the License.
+  
+  This software has been created in the context of the EU-funded RAGE project.
+  Realising and Applied Gaming Eco-System (RAGE), Grant agreement No 644187, 
+  http://rageproject.eu/
 
-namespace webTest
+  Development was done by Cognitive Science Section (CSS) 
+  at Knowledge Technologies Institute (KTI)at Graz University of Technology (TUGraz).
+  http://kti.tugraz.at/css/
+
+  Created by: Matthias Maurer, TUGraz <mmaurer@tugraz.at>
+*/
+
+using System;
+
+namespace competenceservice
 {
 	
 	public partial class Default : System.Web.UI.Page
 	{
 		public void button1Clicked (object sender, EventArgs args)
 		{
-			if (inputname.Text.Equals ("") || inputpassword.Text.Equals ("") || inputstructure.Text.Equals ("")) {
-				inputname.Text += " - data missing";
+			if ( inputstructure.Text.Equals ("")) {
+                inputstructure.Text = "data missing";
 				return;
 			}
 
-			DBConnect dbc = new DBConnect ();
-			int retVal = dbc.Insert (inputname.Text,inputpassword.Text,inputstructure.Text);
-
-			if (retVal == 0) {
-				inputname.Text = "";
-				inputpassword.Text = "";
-				inputstructure.Text = "";
-			} else {
-				inputname.Text += " - NAME already taken!";
-			}
+            //int retVal = DatabaseHandler.Instance.insertdomainmodel(inputname.Text,inputpassword.Text,inputstructure.Text);
+            string retVal = competenceframework.CompetenceFramework.storedm(inputstructure.Text);
+            
+			inputstructure.Text = "structure stored with id "+retVal;
 		}
 	}
 }

@@ -1,0 +1,8 @@
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\consoleTest\bin\Debug\consoleTest.exe.config
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\consoleTest\bin\Debug\consoleTest.exe
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\consoleTest\bin\Debug\consoleTest.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\consoleTest\bin\Debug\MySql.Data.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\consoleTest\obj\Debug\databaseTest.csprojResolveAssemblyReference.cache
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\consoleTest\obj\Debug\consoleTest.exe
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\consoleTest\obj\Debug\consoleTest.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\consoleTest\bin\Debug\MySql.Data.xml

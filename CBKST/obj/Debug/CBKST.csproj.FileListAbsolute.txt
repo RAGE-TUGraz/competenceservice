@@ -1,0 +1,5 @@
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\CBKST\bin\Debug\CBKST.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\CBKST\bin\Debug\CBKST.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\CBKST\obj\Debug\CBKST.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\CBKST\obj\Debug\CBKST.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\CBKST\obj\Debug\CBKST.csprojResolveAssemblyReference.cache
