@@ -67,6 +67,11 @@ namespace storagedb
         /// </summary>
         private readonly DBConnectCompetenceState competencestatedb = new DBConnectCompetenceState();
 
+        /// <summary>
+        /// The competence development database handler instance.
+        /// </summary>
+        private readonly DBConnectCompetenceDevelopment competencedevelopmentdb = new DBConnectCompetenceDevelopment();
+
         #endregion
         #region Constructor
         private DatabaseHandler()
@@ -96,7 +101,11 @@ namespace storagedb
         /// <returns></returns>
         public bool resetDatabases()
         {
-            //reset domain model database and enter test domain model
+            //get all trackingids and deleted related competence development tables
+            List<string> trackingids = trackingiddb.getAllTrackingIds();
+            competencedevelopmentdb.dropTables(trackingids);
+
+            //reset domain model database 
             domainmodeldb.dropTable();
             domainmodeldb.createTable();
 
@@ -208,9 +217,9 @@ namespace storagedb
         /// </summary>
         /// <param name="id"> string formated integer - primary key of table to delete doamin model</param>
         /// <returns> true, if deleting was successful, false otherwise</returns>
-        public bool deleteDomainModelById(string id)
+        public bool deleteDomainModelById(string dmid)
         {
-            return domainmodeldb.DeleteById(id);
+            return domainmodeldb.DeleteById(dmid);
         }
 
         /// <summary>
@@ -228,6 +237,7 @@ namespace storagedb
             //create initial probability structure
             CompetenceProbabilities ps = CompetenceHandler.Instance.createInitialCompetenceProbabilities(DomainModel.getDMFromXmlString(dmstring));
 
+
             //store cs -> get csid
             string csid = competencestatedb.Insert(ps.toXmlString());
             if (csid == null)
@@ -237,6 +247,12 @@ namespace storagedb
             string tid = createNewTrackingId();
             if (trackingiddb.Insert(tid, dmid, csid) == null)
                 return null;
+
+            //create competence development table
+            competencedevelopmentdb.createTable(tid);
+            //enter first dataset into competence development table
+            competencedevelopmentdb.Insert(tid,ps.toXmlString());
+
 
             return tid;
         }
@@ -292,8 +308,11 @@ namespace storagedb
         /// <param name="competenceProbabiltyId"> id of the entry</param>
         /// <param name="competenceProbability"> new value of the entry</param>
         /// <returns></returns>
-        public bool performCompetenceProbabilityUpdate(string competenceProbabiltyId, string competenceProbability)
+        public bool performCompetenceProbabilityUpdate(string tid, string competenceProbabiltyId, string competenceProbability)
         {
+            //store new value in competence development table
+            competencedevelopmentdb.Insert(tid, competenceProbability);
+
             return competencestatedb.Update(competenceProbabiltyId, competenceProbability);
         }
 
@@ -332,6 +351,9 @@ namespace storagedb
             string[] ids = getDomainmodelIdAndCompetenceProbabilityId(tid);
             if (ids == null)
                 return false;
+
+            //delete competence development
+            competencedevelopmentdb.dropTable(tid);
 
             //delete cp
             if (!deleteCompetenceProbabilityEntryById(ids[1]))

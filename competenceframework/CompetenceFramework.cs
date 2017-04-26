@@ -105,8 +105,9 @@ namespace competenceframework
         /// </summary>
         public static bool deletedm(string dmid)
         {
+
             List<string> trackingIdsAffected = DatabaseHandler.Instance.getTrackingIdsToDomainModelId(dmid);
-            foreach(string tid in trackingIdsAffected)
+            foreach (string tid in trackingIdsAffected)
             {
                 if (!deletetid(tid))
                     return false;
@@ -165,7 +166,7 @@ namespace competenceframework
 
            
             //store cs
-            return DatabaseHandler.Instance.performCompetenceProbabilityUpdate(ids[1],newcp.toXmlString());
+            return DatabaseHandler.Instance.performCompetenceProbabilityUpdate(tid, ids[1],newcp.toXmlString());
         }
 
         /// <summary>

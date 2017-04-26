@@ -61,7 +61,8 @@ namespace storagedb
 		}
 
 		public void dropTable(){
-			string statement = "drop table IF EXISTS trackingids;";
+
+            string statement = "drop table IF EXISTS trackingids;";
 
 			//open connection
 			if (this.OpenConnection() == true)
@@ -198,7 +199,11 @@ namespace storagedb
 					else
 						query += " AND ";
 				}
-			}
+            }
+            else
+            {
+                query += ";";
+            }
 
 			//Create a list to store the result
 			List< string >[] list = new List< string >[3];
@@ -268,6 +273,13 @@ namespace storagedb
                 return null;
             return list[2][0];
         }
+
+
+        public List<string> getAllTrackingIds()
+        {
+            return Select(null)[0];
+        }
+
     }
 }
 

@@ -43,6 +43,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DatabaseHandler.cs" />
+    <Compile Include="DataBase\DBConnectCompetenceDevelopment.cs" />
     <Compile Include="DataBase\DBConnectCompetenceState.cs" />
     <Compile Include="DataBase\DBConnectDomainModel.cs" />
     <Compile Include="DataBase\DBConnectTrackingId.cs" />
