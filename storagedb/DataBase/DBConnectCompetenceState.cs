@@ -78,7 +78,7 @@ namespace storagedb
 		}
 
 		public void createTable(){
-			string statement = "create table IF NOT EXISTS competencestates (id INT NOT NULL AUTO_INCREMENT, competencestate TEXT, PRIMARY KEY(id));";
+			string statement = "create table IF NOT EXISTS competencestates (id INT NOT NULL AUTO_INCREMENT, competencestate TEXT, datetime TEXT, PRIMARY KEY(id));";
 
 			//open connection
 			if (this.OpenConnection() == true)
@@ -150,7 +150,7 @@ namespace storagedb
 		{
 			string retVal = null;
 
-			string query = "INSERT INTO competencestates ( competencestate) VALUES('"+competencestate+"')";
+			string query = "INSERT INTO competencestates (competencestate, datetime) VALUES('"+competencestate+ "',UTC_TIMESTAMP())";
 
 			//open connection
 			if (this.OpenConnection() == true)
@@ -196,12 +196,13 @@ namespace storagedb
 			}
 
 			//Create a list to store the result
-			List< string >[] list = new List< string >[2];
+			List< string >[] list = new List< string >[3];
 			list[0] = new List< string >();
 			list[1] = new List< string >();
+            list[2] = new List<string>();
 
-			//Open connection
-			if (this.OpenConnection() == true)
+            //Open connection
+            if (this.OpenConnection() == true)
 			{
 				//Create Command
 				MySqlCommand cmd = new MySqlCommand(query, connection);
@@ -213,7 +214,8 @@ namespace storagedb
 				{
 					list[0].Add(dataReader["id"] + "");
 					list[1].Add(dataReader["competencestate"] + "");
-				}
+                    list[2].Add(dataReader["datetime"] + "");
+                }
 
 				//close Data Reader
 				dataReader.Close();
