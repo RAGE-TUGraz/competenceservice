@@ -36,10 +36,14 @@ namespace storagedb
     public class DatabaseHandler
     {
         #region Parameters
-        public static string server = "localhost";
-        public static string database = "competencedb";
-        public static string uid = "root";
-        public static string password = "rage";
+        internal static string server = "localhost";
+        internal static string database = "competencedb";
+        internal static string uid = "root";
+        internal static string password = "rage";
+
+        internal string allowedCharsInId = "0123456789abcdefghijklmnopqrstuvwxyz"; //ABCDEFGHIJKLMNOPQRSTUVWXYZ
+        internal int idLength = 3;
+
         #endregion
         #region Fields
 
@@ -67,6 +71,7 @@ namespace storagedb
         #region Constructor
         private DatabaseHandler()
         {
+            idLength = Math.Min(idLength,50);
         }
         #endregion
         #region Properties
@@ -116,6 +121,57 @@ namespace storagedb
             return true;
         }
 
+        /// <summary>
+        /// Method for creating a random tracking code
+        /// </summary>
+        /// <param name="trackingIdLength"> length of the tracking code to create</param>
+        /// <param name="allowedChars"> characters which are allowed for the tracking code</param>
+        /// <returns> a string of length 'trackingIdLength' with random characters from 'allowedChars'</returns>
+        private string createNewRandomString(int trackingIdLength,string allowedChars)
+        {
+            Random rng = new Random();
+            int length = trackingIdLength;
+            int setLength = allowedChars.Length;
+            char[] chars = new char[length];
+
+            for (int i = 0; i < length; ++i)
+            {
+                chars[i] = allowedChars[rng.Next(setLength)];
+            }
+
+            return new string(chars);
+        }
+
+        /// <summary>
+        /// Method for creating a new, not existing tracking id
+        /// </summary>
+        /// <returns></returns>
+        private string createNewTrackingId()
+        {
+            string retStr;
+            do
+            {
+                retStr = createNewRandomString(idLength, allowedCharsInId);
+            } while (trackingiddb.doesTrackingIdExist(retStr));
+
+            return retStr;
+        }
+
+        /// <summary>
+        /// Method for creating a new, not existing domain model id
+        /// </summary>
+        /// <returns></returns>
+        private string createNewDomainmodelId()
+        {
+            string retStr;
+            do
+            {
+                retStr = createNewRandomString(idLength, allowedCharsInId);
+            } while (domainmodeldb.doesIdExist(retStr));
+
+            return retStr;
+        }
+
         #endregion
         #region Methods
 
@@ -138,10 +194,13 @@ namespace storagedb
         /// <param name="name"> omitted in this version </param>
         /// <param name="password"> omitted in this version </param>
         /// <param name="domainmodel"> xml representation of a domain model</param>
-        /// <returns></returns>
-        public int insertdomainmodel(string name, string password, string domainmodel)
+        /// <returns>null if unsuccessful, the id otherwise</returns>
+        public string insertdomainmodel(string name, string password, string domainmodel)
         {
-            return domainmodeldb.Insert(name,password,domainmodel);
+            string dmid = createNewDomainmodelId();
+            if (!domainmodeldb.Insert(dmid, name, password, domainmodel))
+                return null;
+            return dmid;
         }
 
         /// <summary>
@@ -175,10 +234,9 @@ namespace storagedb
                 return null;
 
             //use cs id to create tracking id
-            string tid = trackingiddb.Insert(dmid, csid);
-            if (tid == null)
+            string tid = createNewTrackingId();
+            if (trackingiddb.Insert(tid, dmid, csid) == null)
                 return null;
-
 
             return tid;
         }
@@ -190,7 +248,20 @@ namespace storagedb
         /// <returns> null if there is an error, the probability vector otherwise</returns>
         public string getCompetenceProbabilitiesByTrackingId(string tid)
         {
-            return competencestatedb.getCompetenceState(tid);
+            string competenceprobabilitiesid = trackingiddb.getCpidByTrackingId(tid);
+            if (competenceprobabilitiesid == null)
+                return null;
+            return competencestatedb.getCompetenceState(competenceprobabilitiesid);
+        }
+
+        /// <summary>
+        /// Method returning the competence probability vector for a given comp.prob. id
+        /// </summary>
+        /// <param name="cpid"> cp id supplied</param>
+        /// <returns> null if there is an error, the probability vector otherwise</returns>
+        public string getCompetenceProbabilitiesByCpId(string cpid)
+        {
+            return competencestatedb.getCompetenceState(cpid);
         }
 
         /// <summary>
@@ -201,12 +272,8 @@ namespace storagedb
         /// return[0]...domain model id, string[1]...competence probability id otherwise</returns>
         public string[] getDomainmodelIdAndCompetenceProbabilityId(string tid)
         {
-            int inttid;
-            if (!Int32.TryParse(tid, out inttid))
-                return null;
-
             List<string> wherestatement = new List<string>();
-            wherestatement.Add("trackingid="+tid);
+            wherestatement.Add("trackingid='"+tid+"'");
             List<string>[] values = trackingiddb.Select(wherestatement);
             if (values == null || values[0].Count == 0)
                 return null;
@@ -237,12 +304,8 @@ namespace storagedb
         /// <returns> list of ftrackingids assigned to domain model id</returns>
         public List<string> getTrackingIdsToDomainModelId(string dmid)
         {
-            int dmidint;
-            if (!Int32.TryParse(dmid, out dmidint))
-                return null;
-
             List<string> whereStatement = new List<string>();
-            whereStatement.Add("domainmodelid=" + dmidint.ToString());
+            whereStatement.Add("domainmodelid='" + dmid+"'");
             List<string> [] data = trackingiddb.Select(whereStatement);
             
             return data[0];

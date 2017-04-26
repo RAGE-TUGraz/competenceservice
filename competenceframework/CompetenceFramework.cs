@@ -30,6 +30,7 @@ using storagedb;
 using CBKST;
 using CBKST.Elements;
 using System.Collections.Generic;
+using System;
 
 namespace competenceframework
 {
@@ -88,17 +89,15 @@ namespace competenceframework
         #endregion
         #region Methods
 
-
         /// <summary>
         /// Method for storing a domainmodel, an id for this domainmodel is returned
         /// </summary>
-        public static string storedm(string data)
+        /// <param name="dm"> domain model to be stored</param>
+        /// <returns> null if unsuccessful, the id otherwise</returns>
+        public static string storedm(string dm)
         {
             //structure name/password omitted in this version
-            int retVal = DatabaseHandler.Instance.insertdomainmodel("","",data);
-            if (retVal == 0)
-                return null;
-            return retVal.ToString();
+            return DatabaseHandler.Instance.insertdomainmodel("","", dm);
         }
 
         /// <summary>
@@ -154,7 +153,7 @@ namespace competenceframework
 
             //load dm/cp
             string dmstring = getdm(ids[0]);
-            string cpstring = getcp(ids[1]);
+            string cpstring = getcpByCpId(ids[1]);
             if (dmstring == null || cpstring == null)
                 return false;
 
@@ -164,7 +163,7 @@ namespace competenceframework
             EvidenceSet es = EvidenceSet.getESFromXmlString(evidence);
             CompetenceProbabilities newcp = CompetenceHandler.Instance.updateCompetenceState(dm,cp,es);
 
-
+           
             //store cs
             return DatabaseHandler.Instance.performCompetenceProbabilityUpdate(ids[1],newcp.toXmlString());
         }
@@ -184,11 +183,20 @@ namespace competenceframework
         /// </summary>
         /// <param name="tid"> tracking id of the player</param>
         /// <returns>null if there is an error, otherwise a xml representation of the player's competence state</returns>
-        public static string getcp(string tid)
+        public static string getcpByTid(string tid)
         {
             return DatabaseHandler.Instance.getCompetenceProbabilitiesByTrackingId(tid);
         }
 
+        /// <summary>
+        /// Method for returning the competence state of a player by tracking id
+        /// </summary>
+        /// <param name="tid"> tracking id of the player</param>
+        /// <returns>null if there is an error, otherwise a xml representation of the player's competence state</returns>
+        public static string getcpByCpId(string cpid)
+        {
+            return DatabaseHandler.Instance.getCompetenceProbabilitiesByCpId(cpid);
+        }
 
         #endregion Methods
     }

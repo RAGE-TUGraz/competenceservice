@@ -114,16 +114,17 @@ namespace UnitTestCompetenceservice
             Console.WriteLine("TRACKINGID:\n===========\n" + trackingid);
 
             //requesting the competence probabilities
-            string cp = CompetenceFramework.getcp(trackingid);
+            string cp = CompetenceFramework.getcpByTid(trackingid);
             Console.WriteLine("COMPETENCES:\n============\n" + cp);
 
             //performing an update for competence 'C1'
             Console.WriteLine("PERFORMING UPDATE BASED ON COMPETENCE ID (C1-MEDIUM-UP)");
             string evidence = "<evidenceset><evidence><type>Competence</type><competenceid>C1</competenceid><direction>true</direction><power>Medium</power></evidence></evidenceset>";
-            CompetenceFramework.updatecompetencestate(trackingid, evidence);
+            if (!CompetenceFramework.updatecompetencestate(trackingid, evidence))
+                throw new Exception("Update unsuccessful");
 
             //requesting the competence probabilities
-            cp = CompetenceFramework.getcp(trackingid);
+            cp = CompetenceFramework.getcpByTid(trackingid);
             Console.WriteLine("COMPETENCES:\n============\n" + cp);
         }
 
@@ -145,16 +146,17 @@ namespace UnitTestCompetenceservice
             Console.WriteLine("TRACKINGID:\n===========\n" + trackingid);
 
             //requesting the competence probabilities
-            string cp = CompetenceFramework.getcp(trackingid);
+            string cp = CompetenceFramework.getcpByTid(trackingid);
             Console.WriteLine("COMPETENCES:\n============\n" + cp);
 
             //performing an update for competence 'C1'
             Console.WriteLine("PERFORMING UPDATE BASED ON ACTIVITY (C1-MEDIUM-UP)");
             string evidence = "<evidenceset><evidence><type>Activity</type><activity>activityc1</activity></evidence></evidenceset>";
-            CompetenceFramework.updatecompetencestate(trackingid, evidence);
+            if(!CompetenceFramework.updatecompetencestate(trackingid, evidence))
+                throw new Exception("Update unsuccessful");
 
             //requesting the competence probabilities
-            cp = CompetenceFramework.getcp(trackingid);
+            cp = CompetenceFramework.getcpByTid(trackingid);
             Console.WriteLine("COMPETENCES:\n============\n" + cp);
         }
 
@@ -176,16 +178,17 @@ namespace UnitTestCompetenceservice
             Console.WriteLine("TRACKINGID:\n===========\n" + trackingid);
 
             //requesting the competence probabilities
-            string cp = CompetenceFramework.getcp(trackingid);
+            string cp = CompetenceFramework.getcpByTid(trackingid);
             Console.WriteLine("COMPETENCES:\n============\n" + cp);
 
             //performing an update for competence 'C1'
             Console.WriteLine("PERFORMING UPDATE BASED ON GAMESITUATION (C1-MEDIUM-UP)");
             string evidence = "<evidenceset><evidence><type>Gamesituation</type><gamesituation>gs1</gamesituation><direction>true</direction></evidence></evidenceset>";
-            CompetenceFramework.updatecompetencestate(trackingid, evidence);
+            if(!CompetenceFramework.updatecompetencestate(trackingid, evidence))
+                throw new Exception("Update unsuccessful");
 
             //requesting the competence probabilities
-            cp = CompetenceFramework.getcp(trackingid);
+            cp = CompetenceFramework.getcpByTid(trackingid);
             Console.WriteLine("COMPETENCES:\n============\n" + cp);
         }
 
@@ -207,14 +210,14 @@ namespace UnitTestCompetenceservice
             Console.WriteLine("TRACKINGID:\n===========\n" + trackingid);
 
             //requesting the competence probabilities
-            string cp = CompetenceFramework.getcp(trackingid);
+            string cp = CompetenceFramework.getcpByTid(trackingid);
             Console.WriteLine("COMPETENCES:\n============\n" + cp);
 
             //deleting the tracking id
             CompetenceFramework.deletetid(trackingid);
 
             //requesting the competence probabilities
-            cp = CompetenceFramework.getcp(trackingid);
+            cp = CompetenceFramework.getcpByTid(trackingid);
             if (cp != null)
                 throw new Exception("this should be null now!");
         }
@@ -237,14 +240,14 @@ namespace UnitTestCompetenceservice
             Console.WriteLine("TRACKINGID:\n===========\n" + trackingid);
 
             //requesting the competence probabilities
-            string cp = CompetenceFramework.getcp(trackingid);
+            string cp = CompetenceFramework.getcpByTid(trackingid);
             Console.WriteLine("COMPETENCES:\n============\n" + cp);
 
             //deleting the domainmodel
             CompetenceFramework.deletedm(domainmodelid);
 
             //requesting the competence probabilities
-            cp = CompetenceFramework.getcp(trackingid);
+            cp = CompetenceFramework.getcpByTid(trackingid);
             if (cp != null)
                 throw new Exception("this should be null now!");
 

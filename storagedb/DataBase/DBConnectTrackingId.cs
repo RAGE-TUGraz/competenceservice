@@ -78,7 +78,7 @@ namespace storagedb
 		}
 
 		public void createTable(){
-			string statement = "create table IF NOT EXISTS trackingids (trackingid INT NOT NULL AUTO_INCREMENT, domainmodelid INT NOT NULL, competencestateid INT NOT NULL, PRIMARY KEY(trackingid));";
+			string statement = "create table IF NOT EXISTS trackingids (trackingid TEXT NOT NULL, domainmodelid TEXT NOT NULL, competencestateid INT NOT NULL, PRIMARY KEY(trackingid(50)));";
 
 			//open connection
 			if (this.OpenConnection() == true)
@@ -147,14 +147,14 @@ namespace storagedb
 		/// </returns>
 		/// <param name="userid">unique identifier of the competence state</param>
 		/// <param name="competencestate">xml representation of the competence state</param>
-		public string Insert(string domainmodelid, string competencestateid)
-		{
-            int dmid, csid;
-            if (!Int32.TryParse(domainmodelid, out dmid) || !Int32.TryParse(competencestateid, out csid))
+		public string Insert(string trackingId, string domainmodelid, string competencestateid)
+        {
+            int csid;
+            if (!Int32.TryParse(competencestateid, out csid))
                 return null;
 
 			string retVal = null;
-			string query = "INSERT INTO trackingids (domainmodelid, competencestateid) VALUES("+dmid+", "+csid+")";
+			string query = "INSERT INTO trackingids (trackingid, domainmodelid, competencestateid) VALUES('"+ trackingId +"','" + domainmodelid + "', "+csid+")";
 
 			//open connection
 			if (this.OpenConnection() == true)
@@ -169,8 +169,8 @@ namespace storagedb
 				//close connection
 				this.CloseConnection();
 			}
-
-			return retVal;
+            
+            return retVal;
 		}
 
 		/// <summary>
@@ -178,9 +178,9 @@ namespace storagedb
 		/// </summary>
 		/// <returns>true, if user id exist, false otherwise.</returns>
 		/// <param name="name">user id</param>
-		public bool doesTrackingIdExist(int trackingid){
+		public bool doesTrackingIdExist(string trackingid){
 			List<string> whereStatements = new List<string> ();
-			whereStatements.Add ("trackingid=" + trackingid + "");
+			whereStatements.Add ("trackingid='" + trackingid + "'");
 			List<string>[] list = Select (whereStatements);
 			return list [0].Count > 0;
 		}
@@ -241,11 +241,8 @@ namespace storagedb
         public bool DeleteById(string id)
         {
             bool retval = false;
-            int idint;
-            if (!Int32.TryParse(id, out idint))
-                return retval;
 
-            string query = "DELETE FROM trackingids WHERE trackingid=" + idint + "";
+            string query = "DELETE FROM trackingids WHERE trackingid='" + id + "'";
 
             if (this.OpenConnection() == true)
             {
@@ -257,6 +254,20 @@ namespace storagedb
             return retval;
         }
 
+        /// <summary>
+        /// returns the current competence probabilities id for a given tracking id
+        /// </summary>
+        /// <param name="tid"></param>
+        /// <returns></returns>
+        public string getCpidByTrackingId(string tid)
+        {
+            List<string> whereStatements = new List<string>();
+            whereStatements.Add("trackingid='" + tid + "'");
+            List<string>[] list = Select(whereStatements);
+            if (list[0].Count == 0)
+                return null;
+            return list[2][0];
+        }
     }
 }
 

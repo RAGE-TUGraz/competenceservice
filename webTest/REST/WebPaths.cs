@@ -75,7 +75,7 @@ namespace competenceservice
             /// <summary>
             /// Method for returning the competence probabilities of a player by tracking id
             /// </summary>
-            Get["/getcompetencestate/{tid}"] = data => WebMethods.getcp(data.tid);
+            Get["/getcompetencestate/{tid}"] = data => WebMethods.getcpByTid(data.tid);
 
             
 

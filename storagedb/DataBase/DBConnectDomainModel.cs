@@ -81,7 +81,7 @@ namespace storagedb
 	    }
 
 	    public void createTable(){
-		    string statement = "create table IF NOT EXISTS domainmodels (id INT NOT NULL AUTO_INCREMENT, name VARCHAR(30), password VARCHAR(30), structure TEXT, PRIMARY KEY(id));";
+		    string statement = "create table IF NOT EXISTS domainmodels (id TEXT NOT NULL, name VARCHAR(30), password VARCHAR(30), structure TEXT, PRIMARY KEY(id(50)));";
 
 		    //open connection
 		    if (this.OpenConnection() == true)
@@ -151,10 +151,9 @@ namespace storagedb
 	    /// <param name="name">structure name</param>
 	    /// <param name="password">structure password</param>
 	    /// <param name="structure">Structure</param>
-	    public int Insert(string name, string password, string structure)
+	    public bool Insert(string id, string name, string password, string structure)
 	    {
-            int retVal = 0;
-		    string query = "INSERT INTO domainmodels (name, password, structure) VALUES('"+name+"', '"+password+"', '"+structure+"')";
+		    string query = "INSERT INTO domainmodels (id, name, password, structure) VALUES('"+id+"','"+name+"', '"+password+"', '"+structure+"')";
 
 		    //open connection
 		    if (this.OpenConnection() == true)
@@ -164,12 +163,13 @@ namespace storagedb
 
 			    //Execute command
 			    cmd.ExecuteNonQuery();
-                retVal = (int)cmd.LastInsertedId;
 
 			    //close connection
 			    this.CloseConnection();
-		    }
-		    return retVal;
+		    }else
+                return false;
+
+		    return true;
 	    }
 
 	    //Update statement
@@ -201,11 +201,8 @@ namespace storagedb
         public bool DeleteById(string id)
         {
             bool retval = false;
-            int idint;
-            if (!Int32.TryParse(id, out idint))
-                return retval;
 
-            string query = "DELETE FROM domainmodels WHERE id=" + idint + "";
+            string query = "DELETE FROM domainmodels WHERE id='" + id + "'";
 
             if (this.OpenConnection() == true)
             {
@@ -412,7 +409,7 @@ namespace storagedb
             structure += "<situations><situation id=\"gs1\"><competence id=\"C1\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs2\"><competence id=\"C2\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs3\"><competence id=\"C3\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs4\"><competence id=\"C4\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs5\"><competence id=\"C5\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C1\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C2\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs6\"><competence id=\"C6\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C4\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs7\"><competence id=\"C4\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C7\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs8\"><competence id=\"C8\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C6\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C3\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs9\"><competence id=\"C9\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C5\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C8\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs10\"><competence id=\"C10\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C9\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C7\" levelup=\"medium\" leveldown=\"medium\" /></situation></situations>";
             structure += "<activities><activity id=\"activityc1\"><competence id=\"C1\" power=\"medium\" direction=\"up\"></competence></activity></activities>";
             structure += "</relations><updatelevels><level direction=\"up\" power=\"low\" xi=\"1.2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"up\" power=\"medium\" xi=\"2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"up\" power=\"high\" xi=\"4\" minonecompetence=\"true\" maxonelevel=\"false\" /><level direction=\"down\" power=\"low\" xi=\"1.2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"down\" power=\"medium\" xi=\"2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"down\" power=\"high\" xi=\"4\" minonecompetence=\"true\" maxonelevel=\"false\" /></updatelevels></domainmodel>";
-		    Insert ("dm1","dm1",structure);
+		    Insert ("1","dm1","dm1",structure);
 	    }
 
 	    public int getDomainModelIdByName(string name){
@@ -435,18 +432,27 @@ namespace storagedb
 
         public string getDomainModelById(string id)
         {
-            string retval = null;
-            int idint;
-            if (!Int32.TryParse(id, out idint))
-                return retval;
-
             List<string> whereStatements = new List<string>();
-            whereStatements.Add("id=" + id.ToString() + "");
+            whereStatements.Add("id='" + id+ "'");
             List<string>[] list = Select(whereStatements);
             if (list[3].Count == 0)
                 return null;
             return list[3][0];
         }
+
+        /// <summary>
+        /// Doeses the domain model id exist - return true if it does.
+        /// </summary>
+        /// <returns>true, if user id exist, false otherwise.</returns>
+        /// <param name="domainmodelid">domain model id</param>
+        public bool doesIdExist(string domainmodelid)
+        {
+            List<string> whereStatements = new List<string>();
+            whereStatements.Add("id='" + domainmodelid + "'");
+            List<string>[] list = Select(whereStatements);
+            return list[0].Count > 0;
+        }
+
     }
 
 }

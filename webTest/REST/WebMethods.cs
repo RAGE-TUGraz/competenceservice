@@ -144,9 +144,9 @@ namespace competenceservice
         /// </summary>
         /// <param name="tid"> tracking id of the player</param>
         /// <returns> xml representation of the player's competence state</returns>
-        public static string getcp(string tid)
+        public static string getcpByTid(string tid)
         {
-            string returnstring = CompetenceFramework.getcp(tid);
+            string returnstring = CompetenceFramework.getcpByTid(tid);
             if (returnstring == null)
             {
                 return "<failure />";

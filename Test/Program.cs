@@ -37,7 +37,7 @@ namespace Test
 		{
             TestCases tc = new TestCases();
             tc.Initialize();
-            tc.test10();
+            tc.test01();
 
             Console.ReadLine();
 		}
