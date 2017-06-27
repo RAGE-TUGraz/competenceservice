@@ -40,9 +40,12 @@ namespace CBKST.Elements
 	[XmlRoot("domainmodel")]
 	public class DomainModel
 	{
-		#region Properties
+        #region Properties
 
-		[XmlElement("elements")]
+        [XmlAttribute("transitionprobability")]
+        public string transitionprobability { get; set; }
+
+        [XmlElement("elements")]
 		public Elements elements { get; set; }
 
 		[XmlElement("relations")]
@@ -70,12 +73,19 @@ namespace CBKST.Elements
 
 		public static DomainModel getDMFromXmlString(String str)
 		{
-			XmlSerializer serializer = new XmlSerializer(typeof(DomainModel));
-			using (TextReader reader = new StringReader(str))
-			{
-				DomainModel result = (DomainModel)serializer.Deserialize(reader);
-				return (result);
-			}
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(DomainModel));
+                using (TextReader reader = new StringReader(str))
+                {
+                    DomainModel result = (DomainModel)serializer.Deserialize(reader);
+                    return (result);
+                }
+            }catch(Exception e)
+            {
+                Console.WriteLine("Exception Occured while desirilizing: "+e.Message);
+                return null;
+            }
 		}
 
 		public String toXmlString()

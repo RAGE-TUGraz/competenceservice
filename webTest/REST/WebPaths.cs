@@ -26,12 +26,15 @@
   Created by: Matthias Maurer, TUGraz <mmaurer@tugraz.at>
 */
 
+using competenceframework;
 using Nancy.ModelBinding;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using Nancy.Extensions;
+using System.Text;
+using Nancy;
 
 namespace competenceservice
 {
@@ -41,6 +44,20 @@ namespace competenceservice
         {
 
             #region WebMethods
+
+            /// <summary>
+            /// Method invoked before each route, checks the authentification
+            /// </summary>
+            Before += (ctx) => {
+                string[] splits = getUsernameAndPwdFromRequest(Request);
+                if(splits.Length<2)
+                    return "<failure> authentification failed </failure>";
+                string username = splits[0];
+                string password = splits[1];
+                if(!CompetenceFramework.isUserValid(username, password))
+                    return "<failure> authentification failed </failure>";
+                return null;
+            };
 
             /// <summary>
             /// Method for storing a domainmodel, an id for this domainmodel is returned
@@ -77,9 +94,30 @@ namespace competenceservice
             /// </summary>
             Get["/getcompetencestate/{tid}"] = data => WebMethods.getcpByTid(data.tid);
 
-            
+
 
             #endregion
+
+
         }
+
+        #region Utilitymethods
+
+        /// <summary>
+        /// gets username and password for basic authentification from request
+        /// </summary>
+        /// <param name="request"></param>
+        /// <returns></returns>
+        private static string[] getUsernameAndPwdFromRequest(Request request)
+        {
+            IEnumerable<string> authorizationHeader = request.Headers["Authorization"];
+            string authorizationString = string.Join("-", authorizationHeader.ToArray());
+            int beginPasswordIndexPosition = authorizationString.IndexOf(" ") + 1;
+            string encodedAuth = authorizationString.Substring(beginPasswordIndexPosition);
+            string decodedAuth = Encoding.UTF8.GetString(Convert.FromBase64String(encodedAuth));
+            string[] splits = decodedAuth.Split(':');
+            return splits;
+        }
+        #endregion
     }
 }

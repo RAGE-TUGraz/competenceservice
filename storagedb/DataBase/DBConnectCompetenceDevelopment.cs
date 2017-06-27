@@ -42,18 +42,18 @@ namespace storagedb
         private string password;
 
         //Constructor
-        public DBConnectCompetenceDevelopment()
+        public DBConnectCompetenceDevelopment(string newServer, string newDatabase, string newUid, string newPassword)
         {
+            server = newServer;
+            database = newDatabase;
+            uid = newUid;
+            password = newPassword;
             Initialize();
         }
 
         //Initialize values
         private void Initialize()
         {
-            server = DatabaseHandler.server;
-            database = DatabaseHandler.database;
-            uid = DatabaseHandler.uid;
-            password = DatabaseHandler.password;
             string connectionString;
             connectionString = "SERVER=" + server + ";" + "DATABASE=" +
                 database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";

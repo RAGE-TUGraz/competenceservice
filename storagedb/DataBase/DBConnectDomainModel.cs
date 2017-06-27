@@ -43,27 +43,27 @@ namespace storagedb
 	    private string password;
 
 	    //Constructor
-	    public DBConnectDomainModel()
-	    {
-		    Initialize();
-            createTable();
-	    }
+	    public DBConnectDomainModel(string newServer, string newDatabase, string newUid, string newPassword)
+        {
+            server = newServer;
+            database = newDatabase;
+            uid = newUid;
+            password = newPassword;
+            Initialize();
+        }
 
-	    //Initialize values
-	    private void Initialize()
-	    {
-            server = DatabaseHandler.server;
-            database = DatabaseHandler.database;
-            uid = DatabaseHandler.uid;
-            password = DatabaseHandler.password;
+        //Initialize values
+        private void Initialize()
+        {
             string connectionString;
-		    connectionString = "SERVER=" + server + ";" + "DATABASE=" + 
-			    database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
+            connectionString = "SERVER=" + server + ";" + "DATABASE=" +
+                database + ";" + "UID=" + uid + ";" + "PASSWORD=" + password + ";";
 
-		    connection = new MySqlConnection(connectionString);
-	    }
+            connection = new MySqlConnection(connectionString);
+            createTable();
+        }
 
-	    public void dropTable(){
+        public void dropTable(){
 		    string statement = "drop table IF EXISTS domainmodels;";
 
 		    //open connection
@@ -81,7 +81,7 @@ namespace storagedb
 	    }
 
 	    public void createTable(){
-		    string statement = "create table IF NOT EXISTS domainmodels (id TEXT NOT NULL, name VARCHAR(30), password VARCHAR(30), structure TEXT, PRIMARY KEY(id(50)));";
+		    string statement = "create table IF NOT EXISTS domainmodels (id TEXT NOT NULL, structure TEXT, PRIMARY KEY(id(50)));";
 
 		    //open connection
 		    if (this.OpenConnection() == true)
@@ -151,9 +151,9 @@ namespace storagedb
 	    /// <param name="name">structure name</param>
 	    /// <param name="password">structure password</param>
 	    /// <param name="structure">Structure</param>
-	    public bool Insert(string id, string name, string password, string structure)
+	    public bool Insert(string id,  string structure)
 	    {
-		    string query = "INSERT INTO domainmodels (id, name, password, structure) VALUES('"+id+"','"+name+"', '"+password+"', '"+structure+"')";
+		    string query = "INSERT INTO domainmodels (id,  structure) VALUES('"+id+"', '"+structure+"')";
 
 		    //open connection
 		    if (this.OpenConnection() == true)
@@ -243,11 +243,9 @@ namespace storagedb
 		    }
 
 		    //Create a list to store the result
-		    List< string >[] list = new List< string >[4];
+		    List< string >[] list = new List< string >[2];
 		    list[0] = new List< string >();
 		    list[1] = new List< string >();
-		    list[2] = new List< string >();
-		    list[3] = new List< string >();
 
 		    //Open connection
 		    if (this.OpenConnection() == true)
@@ -261,9 +259,7 @@ namespace storagedb
 			    while (dataReader.Read())
 			    {
 				    list[0].Add(dataReader["id"] + "");
-				    list[1].Add(dataReader["name"] + "");
-				    list[2].Add(dataReader["password"] + "");
-				    list[3].Add(dataReader["structure"] + "");
+				    list[1].Add(dataReader["structure"] + "");
 			    }
 
 			    //close Data Reader
@@ -388,20 +384,13 @@ namespace storagedb
 		    */
 	    }
 
-	    /// <summary>
-	    /// Doeses the structure name exist - return true if it does.
-	    /// </summary>
-	    /// <returns>true, if structure name exist, false otherwise.</returns>
-	    /// <param name="name">name of the structure</param>
-	    public bool doesStructureNameExist(string name){
-		    List<string> whereStatements = new List<string> ();
-		    whereStatements.Add ("name='" + name + "'");
-		    List<string>[] list = Select (whereStatements);
-		    return list [0].Count > 0;
-	    }
+
 
 	    public void enterTestData(){
-            string structure = "<?xml version=\"1.0\" encoding=\"utf-16\"?><domainmodel xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">";
+            if (doesIdExist("1"))
+                return;
+
+            string structure = "<?xml version=\"1.0\" encoding=\"utf-16\"?><domainmodel transitionprobability=\"0.7\" xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\">";
             structure += "<elements><competences><competence id=\"C1\" /><competence id=\"C2\" /><competence id=\"C3\" /><competence id=\"C4\" /><competence id=\"C5\" /><competence id=\"C6\" /><competence id=\"C7\" /><competence id=\"C8\" /><competence id=\"C9\" /><competence id=\"C10\" /></competences>";
             structure += "<situations><situation id=\"gs1\" /><situation id=\"gs2\" /><situation id=\"gs3\" /><situation id=\"gs4\" /><situation id=\"gs5\" /><situation id=\"gs6\" /><situation id=\"gs7\" /><situation id=\"gs8\" /><situation id=\"gs9\" /><situation id=\"gs10\" /></situations>";
             structure += "<activities><activity id=\"activityc1\"></activity></activities>";
@@ -409,35 +398,20 @@ namespace storagedb
             structure += "<situations><situation id=\"gs1\"><competence id=\"C1\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs2\"><competence id=\"C2\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs3\"><competence id=\"C3\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs4\"><competence id=\"C4\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs5\"><competence id=\"C5\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C1\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C2\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs6\"><competence id=\"C6\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C4\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs7\"><competence id=\"C4\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C7\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs8\"><competence id=\"C8\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C6\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C3\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs9\"><competence id=\"C9\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C5\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C8\" levelup=\"medium\" leveldown=\"medium\" /></situation><situation id=\"gs10\"><competence id=\"C10\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C9\" levelup=\"medium\" leveldown=\"medium\" /><competence id=\"C7\" levelup=\"medium\" leveldown=\"medium\" /></situation></situations>";
             structure += "<activities><activity id=\"activityc1\"><competence id=\"C1\" power=\"medium\" direction=\"up\"></competence></activity></activities>";
             structure += "</relations><updatelevels><level direction=\"up\" power=\"low\" xi=\"1.2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"up\" power=\"medium\" xi=\"2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"up\" power=\"high\" xi=\"4\" minonecompetence=\"true\" maxonelevel=\"false\" /><level direction=\"down\" power=\"low\" xi=\"1.2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"down\" power=\"medium\" xi=\"2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"down\" power=\"high\" xi=\"4\" minonecompetence=\"true\" maxonelevel=\"false\" /></updatelevels></domainmodel>";
-		    Insert ("1","dm1","dm1",structure);
+            Insert ("1",structure);
 	    }
 
-	    public int getDomainModelIdByName(string name){
-		    int retVal = -1;
-		    List<string> whereStatements = new List<string> ();
-		    whereStatements.Add ("name='" + name + "'");
-		    List<string>[] list = Select (whereStatements);
-		    Int32.TryParse (list [0] [0], out retVal);
-		    return retVal;
-	    }
 
-	    public string getDomainModelByName(string name){
-		    List<string> whereStatements = new List<string> ();
-		    whereStatements.Add ("name='" + name + "'");
-		    List<string>[] list = Select (whereStatements);
-		    if (list [3].Count == 0)
-			    return null;
-		    return list [3] [0];
-	    }
+
 
         public string getDomainModelById(string id)
         {
             List<string> whereStatements = new List<string>();
             whereStatements.Add("id='" + id+ "'");
             List<string>[] list = Select(whereStatements);
-            if (list[3].Count == 0)
+            if (list[1].Count == 0)
                 return null;
-            return list[3][0];
+            return list[1][0];
         }
 
         /// <summary>

@@ -47,6 +47,7 @@
     <Compile Include="DataBase\DBConnectCompetenceState.cs" />
     <Compile Include="DataBase\DBConnectDomainModel.cs" />
     <Compile Include="DataBase\DBConnectTrackingId.cs" />
+    <Compile Include="DataBase\DBConnectUser.cs" />
     <Compile Include="Logger.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

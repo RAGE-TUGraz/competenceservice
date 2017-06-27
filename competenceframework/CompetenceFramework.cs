@@ -68,6 +68,12 @@ namespace competenceframework
         #endregion
         #region Utilitymethods
 
+        //Method for dropping all database tables
+        public static void deleteDatabaseTables()
+        {
+            DatabaseHandler.Instance.deleteDatabaseTables();
+        }
+
         /// <summary>
         /// Method resetting the whole storage
         /// </summary>
@@ -86,6 +92,19 @@ namespace competenceframework
             return DatabaseHandler.Instance.createTestdata();
         }
 
+        /// <summary>
+        /// This method allows to change the database access data
+        /// </summary>
+        /// <param name="newServer"> server name </param>
+        /// <param name="newDatabase"> database name </param>
+        /// <param name="newUid"> user id </param>
+        /// <param name="newPassword"> user password</param>
+        public static void setDatabaseAccessData(string newServer, string newDatabase, string newUid, string newPassword)
+        {
+            throw new NotImplementedException();
+            //DatabaseHandler.Instance.setDatabaseAccessData(newServer, newDatabase, newUid, newPassword);
+        }
+
         #endregion
         #region Methods
 
@@ -97,7 +116,7 @@ namespace competenceframework
         public static string storedm(string dm)
         {
             //structure name/password omitted in this version
-            return DatabaseHandler.Instance.insertdomainmodel("","", dm);
+            return DatabaseHandler.Instance.insertdomainmodel(dm);
         }
 
         /// <summary>
@@ -197,6 +216,17 @@ namespace competenceframework
         public static string getcpByCpId(string cpid)
         {
             return DatabaseHandler.Instance.getCompetenceProbabilitiesByCpId(cpid);
+        }
+
+        /// <summary>
+        /// Method for checking if userid/password combination is valid
+        /// </summary>
+        /// <param name="userid"> userid to check</param>
+        /// <param name="password">password to check</param>
+        /// <returns>true, if userid and password fit together</returns>
+        public static bool isUserValid(string userid, string password)
+        {
+            return DatabaseHandler.Instance.isUserValid(userid, password);
         }
 
         #endregion Methods

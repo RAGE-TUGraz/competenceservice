@@ -112,7 +112,7 @@ namespace competenceservice
         /// <returns></returns>
         public static string updatecompetencestate(string tid, string evidence)
         {
-            if(CompetenceFramework.updatecompetencestate(tid, evidence))
+            if (CompetenceFramework.updatecompetencestate(tid, evidence))
             {
                 return "<success />";
             }
@@ -156,7 +156,8 @@ namespace competenceservice
                 return returnstring;
             }
         }
-        
+
         #endregion
+
     }
 }

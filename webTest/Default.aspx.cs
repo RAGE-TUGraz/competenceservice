@@ -33,18 +33,15 @@ namespace competenceservice
 	
 	public partial class Default : System.Web.UI.Page
 	{
-		public void button1Clicked (object sender, EventArgs args)
-		{
-			if ( inputstructure.Text.Equals ("")) {
-                inputstructure.Text = "data missing";
-				return;
-			}
+        protected void buttonloadenterdmClicked(object sender, EventArgs e)
+        {
+            Response.Redirect("websites/enter_domainmodel.aspx");
+        }
 
-            //int retVal = DatabaseHandler.Instance.insertdomainmodel(inputname.Text,inputpassword.Text,inputstructure.Text);
-            string retVal = competenceframework.CompetenceFramework.storedm(inputstructure.Text);
-            
-			inputstructure.Text = "structure stored with id "+retVal;
-		}
-	}
+        protected void buttonviewdomainmodelClicked(object sender, EventArgs e)
+        {
+            Response.Redirect("websites/view_domainmodel.aspx");
+        }
+    }
 }
 

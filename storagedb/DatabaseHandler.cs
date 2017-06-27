@@ -30,6 +30,7 @@ using System;
 using System.Collections.Generic;
 using CBKST.Elements;
 using CBKST;
+using storagedb.DataBase;
 
 namespace storagedb
 {
@@ -55,28 +56,35 @@ namespace storagedb
         /// <summary>
         /// The tracking id database handler instance.
         /// </summary>
-        private readonly DBConnectTrackingId trackingiddb = new DBConnectTrackingId();
+        private  DBConnectTrackingId trackingiddb;
+
+        /// <summary>
+        /// The user database handler instance.
+        /// </summary>
+        private DBConnectUser userdb;
 
         /// <summary>
         /// The domainmodel database handler instance.
         /// </summary>
-        private readonly DBConnectDomainModel domainmodeldb = new DBConnectDomainModel();
+        private  DBConnectDomainModel domainmodeldb;
 
         /// <summary>
         /// The competence state database handler instance.
         /// </summary>
-        private readonly DBConnectCompetenceState competencestatedb = new DBConnectCompetenceState();
+        private  DBConnectCompetenceState competencestatedb;
 
         /// <summary>
         /// The competence development database handler instance.
         /// </summary>
-        private readonly DBConnectCompetenceDevelopment competencedevelopmentdb = new DBConnectCompetenceDevelopment();
+        private  DBConnectCompetenceDevelopment competencedevelopmentdb;
 
         #endregion
         #region Constructor
         private DatabaseHandler()
         {
+            initialize();
             idLength = Math.Min(idLength,50);
+            this.createTestdata();
         }
         #endregion
         #region Properties
@@ -94,6 +102,30 @@ namespace storagedb
 
         #endregion
         #region Utilitymethods
+        
+        //changes the default server access information, if value not null
+        public void setDatabaseAccessData(string newServer, string newDatabase, string newUid, string newPassword)
+        {
+            if(newServer!= null)
+                server = newServer;
+            if (newDatabase != null)
+                database = newDatabase;
+            if (newUid != null)
+                uid = newUid;
+            if (newPassword != null)
+                password = newPassword;
+            initialize();
+        }
+
+        //creates all server connectors
+        private void initialize()
+        {
+            trackingiddb = new DBConnectTrackingId(server, database, uid, password);
+            domainmodeldb = new DBConnectDomainModel(server, database, uid, password);
+            competencestatedb = new DBConnectCompetenceState(server, database, uid, password);
+            competencedevelopmentdb = new DBConnectCompetenceDevelopment(server, database, uid, password);
+            userdb = new DBConnectUser(server, database, uid, password);
+        }
 
         /// <summary>
         /// Method for testing - resetsa database
@@ -117,7 +149,22 @@ namespace storagedb
             trackingiddb.dropTable();
             trackingiddb.createTable();
 
+            userdb.dropTable();
+            userdb.createTable();
+
             return true;
+        }
+
+        public void deleteDatabaseTables()
+        {
+            //get all trackingids and deleted related competence development tables
+            List<string> trackingids = trackingiddb.getAllTrackingIds();
+            competencedevelopmentdb.dropTables(trackingids);
+
+            //delete all other tables
+            domainmodeldb.dropTable();
+            competencestatedb.dropTable();
+            trackingiddb.dropTable();
         }
 
         /// <summary>
@@ -181,6 +228,8 @@ namespace storagedb
             return retStr;
         }
 
+
+
         #endregion
         #region Methods
 
@@ -204,10 +253,10 @@ namespace storagedb
         /// <param name="password"> omitted in this version </param>
         /// <param name="domainmodel"> xml representation of a domain model</param>
         /// <returns>null if unsuccessful, the id otherwise</returns>
-        public string insertdomainmodel(string name, string password, string domainmodel)
+        public string insertdomainmodel(string domainmodel)
         {
             string dmid = createNewDomainmodelId();
-            if (!domainmodeldb.Insert(dmid, name, password, domainmodel))
+            if (!domainmodeldb.Insert(dmid, domainmodel))
                 return null;
             return dmid;
         }
@@ -235,8 +284,12 @@ namespace storagedb
                 return null;
 
             //create initial probability structure
-            CompetenceProbabilities ps = CompetenceHandler.Instance.createInitialCompetenceProbabilities(DomainModel.getDMFromXmlString(dmstring));
-
+            DomainModel dm = DomainModel.getDMFromXmlString(dmstring);
+            if (dm == null)
+                return null;
+            CompetenceProbabilities ps = CompetenceHandler.Instance.createInitialCompetenceProbabilities(dm);
+            if (ps == null)
+                return null;
 
             //store cs -> get csid
             string csid = competencestatedb.Insert(ps.toXmlString());
@@ -366,6 +419,16 @@ namespace storagedb
             return true;
         }
 
+        /// <summary>
+        /// If true, the user is known to the system
+        /// </summary>
+        /// <param name="userid"> userid of the user</param>
+        /// <param name="password"> password belonging to the user</param>
+        /// <returns> true if the password fits to the userid</returns>
+        public bool isUserValid(string userid, string password)
+        {
+            return this.userdb.isUserValid(userid,password);
+        }
         
         #endregion Methods
     }

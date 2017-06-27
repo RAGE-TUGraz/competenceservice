@@ -41,6 +41,8 @@ namespace UnitTestCompetenceservice
         #region Fields
         public string domainmodel = null;
         public string urlprefix = "http://localhost:54059/rest/competenceservice";
+        public string userid="rage";
+        public string userpwd="rage";
         #endregion
         #region Initialization
 
@@ -48,11 +50,19 @@ namespace UnitTestCompetenceservice
         [TestInitialize]
         public void Initialize()
         {
+            //CompetenceFramework.setDatabaseAccessData(null, "testdb", null, null);
             if (domainmodel == null)
+            {
                 storeDomainmodel();
-            else
-                CompetenceFramework.resetStorage();
+            }
         }
+
+        [TestCleanup]
+        public void cleanup()
+        {
+            CompetenceFramework.resetStorage();
+        }
+
         #endregion
         #region Utilitymethods
 
@@ -65,6 +75,7 @@ namespace UnitTestCompetenceservice
             CompetenceFramework.resetStorage();
             CompetenceFramework.createTestdata();
             domainmodel = CompetenceFramework.getdm("1");
+            CompetenceFramework.resetStorage();
         }
 
         /// <summary>
@@ -80,6 +91,8 @@ namespace UnitTestCompetenceservice
             if (type.Equals("POST"))
             {
                 webRequest.ContentType = "text/xml";
+                string svcCredentials = Convert.ToBase64String(ASCIIEncoding.ASCII.GetBytes(userid+":"+userpwd));
+                webRequest.Headers.Add("Authorization", "Basic " + svcCredentials);
                 UTF8Encoding encoder1 = new UTF8Encoding();
                 byte[] bytes = encoder1.GetBytes(data);
                 Stream webStream = webRequest.GetRequestStream();

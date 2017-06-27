@@ -59,15 +59,20 @@
       <HintPath>..\packages\structuremap.4.0.1.318\lib\net40\StructureMap.Net4.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
     <Reference Include="System.Xml" />
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Global.asax" />
+    <Content Include="style.css" />
     <Content Include="web.config" />
     <Content Include="Default.aspx" />
     <Content Include="packages.config" />
+    <Content Include="websites\enter_domainmodel.aspx" />
+    <Content Include="websites\view_domainmodel.aspx" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Global.asax.cs">
@@ -82,6 +87,20 @@
     </Compile>
     <Compile Include="REST\WebMethods.cs" />
     <Compile Include="REST\WebPaths.cs" />
+    <Compile Include="websites\enter_domainmodel.aspx.cs">
+      <DependentUpon>enter_domainmodel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="websites\enter_domainmodel.aspx.designer.cs">
+      <DependentUpon>enter_domainmodel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="websites\view_domainmodel.aspx.cs">
+      <DependentUpon>view_domainmodel.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="websites\view_domainmodel.aspx.designer.cs">
+      <DependentUpon>view_domainmodel.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="REST\Web.config" />
@@ -91,6 +110,9 @@
       <Project>{65d15143-606f-4c36-bbb2-289b1a8d62b1}</Project>
       <Name>competenceframework</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="CustomProfile.pubxml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>

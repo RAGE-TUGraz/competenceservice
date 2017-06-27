@@ -1,0 +1,9 @@
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\storagedb\bin\Release\storagedb.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\storagedb\bin\Release\storagedb.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\storagedb\bin\Release\CBKST.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\storagedb\bin\Release\MySql.Data.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\storagedb\bin\Release\CBKST.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\storagedb\bin\Release\MySql.Data.xml
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\storagedb\obj\Release\storagedb.csprojResolveAssemblyReference.cache
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\storagedb\obj\Release\storagedb.dll
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\storagedb\obj\Release\storagedb.pdb

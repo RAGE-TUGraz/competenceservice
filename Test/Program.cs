@@ -26,6 +26,7 @@
   Created by: Matthias Maurer, TUGraz <mmaurer@tugraz.at>
 */
 
+using competenceframework;
 using System;
 using UnitTestCompetenceservice;
 
@@ -35,9 +36,10 @@ namespace Test
 	{
 		public static void Main (string[] args)
 		{
+            //CompetenceFramework.setDatabaseAccessData(null, "testdb", null, null);
             TestCases tc = new TestCases();
             tc.Initialize();
-            tc.test01();
+            tc.test06();
 
             Console.ReadLine();
 		}
