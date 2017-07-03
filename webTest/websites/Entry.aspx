@@ -1,6 +1,6 @@
-﻿<%@ Page Language="C#" Inherits="competenceservice.Default" ValidateRequest="false" %>
+﻿<%@ Page Language="C#" Inherits="competenceservice.Entry" ValidateRequest="false" %>
 <!DOCTYPE html>
-<link rel="stylesheet" type="text/css" href="style.css" />
+<link rel="stylesheet" type="text/css" href="styleEntry.css" />
 <html>
 <head runat="server">
 	<title>Default</title>

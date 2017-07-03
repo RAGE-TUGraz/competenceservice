@@ -27,25 +27,36 @@
 */
 
 using System;
+using System.Web.Security;
 
 namespace competenceservice
 {
 	
-	public partial class Default : System.Web.UI.Page
+	public partial class Login : System.Web.UI.Page
 	{
-        protected void buttonloadenterdmClicked(object sender, EventArgs e)
+        protected void btnLogin_Click(object sender, EventArgs e)
         {
-            Response.Redirect("websites/enter_domainmodel.aspx");
+            if (!competenceframework.CompetenceFramework.canConnectToDatabase())
+            {
+                lblInvalid.Text = "Cannot connect to database!";
+                return;
+            }
+
+
+            if (competenceframework.CompetenceFramework.isUserValid(txtUsername.Text, txtPassword.Text))
+            {
+                FormsAuthentication.RedirectFromLoginPage(txtUsername.Text, true);
+                Response.Redirect("websites/Entry.aspx");
+            }
+            else
+            {
+                lblInvalid.Text = "Username/Password incorrect!";
+            }
         }
 
-        protected void buttonviewdomainmodelClicked(object sender, EventArgs e)
+        protected void btnLogout_Click(object sender, EventArgs e)
         {
-            Response.Redirect("websites/view_domainmodel.aspx");
-        }
-
-        protected void buttonviewcompetencestateClicked(object sender, EventArgs e)
-        {
-            Response.Redirect("websites/view_competencestate.aspx");
+            FormsAuthentication.SignOut();
         }
     }
 }

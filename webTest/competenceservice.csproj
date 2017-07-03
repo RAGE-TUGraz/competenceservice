@@ -66,25 +66,35 @@
     <Reference Include="System.Web.Services" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Login.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="style.css" />
-    <Content Include="web.config" />
-    <Content Include="Default.aspx" />
+    <Content Include="websites\styleEntry.css" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
+    <Content Include="websites\Entry.aspx" />
     <Content Include="packages.config" />
     <Content Include="websites\enter_domainmodel.aspx" />
     <Content Include="websites\view_competencestate.aspx" />
     <Content Include="websites\view_domainmodel.aspx" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+    </Compile>
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Default.aspx.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="websites\Entry.aspx.cs">
+      <DependentUpon>Entry.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Default.aspx.designer.cs">
-      <DependentUpon>Default.aspx</DependentUpon>
+    <Compile Include="websites\Entry.aspx.designer.cs">
+      <DependentUpon>Entry.aspx</DependentUpon>
     </Compile>
     <Compile Include="REST\WebMethods.cs" />
     <Compile Include="REST\WebPaths.cs" />

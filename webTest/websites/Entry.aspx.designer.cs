@@ -11,7 +11,7 @@
 namespace competenceservice {
 	
 	
-	public partial class Default {
+	public partial class Entry {
 		
 		protected System.Web.UI.HtmlControls.HtmlForm form1;
 		
