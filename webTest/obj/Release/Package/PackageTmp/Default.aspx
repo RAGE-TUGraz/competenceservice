@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" Inherits="competenceservice.Default" ValidateRequest="false" %>
 <!DOCTYPE html>
+<link rel="stylesheet" type="text/css" href="style.css" />
 <html>
 <head runat="server">
 	<title>Default</title>
@@ -7,18 +8,10 @@
 </head>
 <body>
 	<form id="form1" runat="server" accept-charset="utf-8">
-	<!---
-		<asp:Button id="button2" runat="server" Text="Click me!" OnClick="button1Clicked" />
-		<br/>
-		<a href="webservice.asmx">webservice</a>
-		-->
-	<a>Enter new domainmodel:</a><br>
-
-	<br>
-	structure:<br>
-	<asp:TextBox id="inputstructure" TextMode="MultiLine" runat="server" rows="10" cols="40"/>
-	<br>
-	<asp:Button id="button1" runat="server" Text="Submit!"  OnClick="button1Clicked" />
+    <div class="headingstart">Competence Service</div>
+    <asp:Button class="rectangularbutton" id="buttonloadenterdm" runat="server" Text="Enter new domainmodel!"  OnClick="buttonloadenterdmClicked" />
+    <asp:Button class="rectangularbutton" id="buttonviewdomainmodel" runat="server" Text="View domainmodel!"  OnClick="buttonviewdomainmodelClicked" />
+    <asp:Button class="rectangularbutton" id="buttonviewcompetencestate" runat="server" Text="View competence state!"  OnClick="buttonviewcompetencestateClicked" /><br>
 	</form>
 </body>
 </html>

@@ -84,15 +84,6 @@ namespace competenceframework
         }
 
         /// <summary>
-        /// Method for creating/storing testdata
-        /// </summary>
-        /// <returns>true if successful, false otherwise</returns>
-        public static bool createTestdata()
-        {
-            return DatabaseHandler.Instance.createTestdata();
-        }
-
-        /// <summary>
         /// This method allows to change the database access data
         /// </summary>
         /// <param name="newServer"> server name </param>
@@ -227,6 +218,15 @@ namespace competenceframework
         public static bool isUserValid(string userid, string password)
         {
             return DatabaseHandler.Instance.isUserValid(userid, password);
+        }
+
+        /// <summary>
+        /// Returns true, if the mysql database server is running and database exists
+        /// </summary>
+        /// <returns></returns>
+        public static bool canConnectToDatabase()
+        {
+            return DatabaseHandler.Instance.canConnectToDatabase();
         }
 
         #endregion Methods

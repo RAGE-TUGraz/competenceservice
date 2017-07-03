@@ -84,7 +84,6 @@ namespace storagedb
         {
             initialize();
             idLength = Math.Min(idLength,50);
-            this.createTestdata();
         }
         #endregion
         #region Properties
@@ -166,17 +165,7 @@ namespace storagedb
             competencestatedb.dropTable();
             trackingiddb.dropTable();
         }
-
-        /// <summary>
-        /// Method for creating/storing testdata
-        /// </summary>
-        /// <returns></returns>
-        public bool createTestdata()
-        {
-            domainmodeldb.enterTestData();
-            return true;
-        }
-
+        
         /// <summary>
         /// Method for creating a random tracking code
         /// </summary>
@@ -429,7 +418,16 @@ namespace storagedb
         {
             return this.userdb.isUserValid(userid,password);
         }
-        
+
+        /// <summary>
+        /// Returns true, if the mysql database server is running and database exists
+        /// </summary>
+        /// <returns></returns>
+        public bool canConnectToDatabase()
+        {
+            return trackingiddb.canConnectToDatabase();
+        }
+
         #endregion Methods
     }
 }

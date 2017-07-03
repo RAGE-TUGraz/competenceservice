@@ -72,6 +72,7 @@
     <Content Include="Default.aspx" />
     <Content Include="packages.config" />
     <Content Include="websites\enter_domainmodel.aspx" />
+    <Content Include="websites\view_competencestate.aspx" />
     <Content Include="websites\view_domainmodel.aspx" />
   </ItemGroup>
   <ItemGroup>
@@ -93,6 +94,13 @@
     </Compile>
     <Compile Include="websites\enter_domainmodel.aspx.designer.cs">
       <DependentUpon>enter_domainmodel.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="websites\view_competencestate.aspx.cs">
+      <DependentUpon>view_competencestate.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="websites\view_competencestate.aspx.designer.cs">
+      <DependentUpon>view_competencestate.aspx</DependentUpon>
     </Compile>
     <Compile Include="websites\view_domainmodel.aspx.cs">
       <DependentUpon>view_domainmodel.aspx</DependentUpon>

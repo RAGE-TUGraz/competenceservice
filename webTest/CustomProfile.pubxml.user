@@ -10,10 +10,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/CBKST.dll">
-      <publishTime>05/08/2017 12:00:54</publishTime>
+      <publishTime>07/03/2017 08:49:10</publishTime>
     </File>
     <File Include="bin/competenceframework.dll">
-      <publishTime>05/08/2017 12:00:54</publishTime>
+      <publishTime>07/03/2017 08:49:10</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>06/17/2016 18:28:04</publishTime>
@@ -25,10 +25,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/21/2015 11:59:12</publishTime>
     </File>
     <File Include="bin/Nancy.Hosting.Aspnet.dll">
-      <publishTime>05/11/2015 14:40:52</publishTime>
+      <publishTime>11/05/2015 14:40:52</publishTime>
     </File>
     <File Include="bin/storagedb.dll">
-      <publishTime>05/08/2017 12:00:54</publishTime>
+      <publishTime>07/03/2017 08:49:10</publishTime>
     </File>
     <File Include="bin/StructureMap.dll">
       <publishTime>12/14/2015 06:42:18</publishTime>
@@ -37,10 +37,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2015 06:42:18</publishTime>
     </File>
     <File Include="bin/webTest.dll">
-      <publishTime>05/08/2017 12:00:55</publishTime>
+      <publishTime>07/03/2017 08:58:07</publishTime>
     </File>
     <File Include="Default.aspx">
-      <publishTime>04/24/2017 11:19:46</publishTime>
+      <publishTime>07/03/2017 08:45:13</publishTime>
     </File>
     <File Include="Global.asax">
       <publishTime>03/20/2017 09:06:19</publishTime>
@@ -51,8 +51,20 @@ by editing this MSBuild file. In order to learn more about this please visit htt
     <File Include="REST/Web.config">
       <publishTime>04/24/2017 09:18:36</publishTime>
     </File>
+    <File Include="style.css">
+      <publishTime>06/28/2017 11:12:38</publishTime>
+    </File>
     <File Include="web.config">
       <publishTime>04/25/2017 13:38:34</publishTime>
+    </File>
+    <File Include="websites/enter_domainmodel.aspx">
+      <publishTime>05/22/2017 13:36:25</publishTime>
+    </File>
+    <File Include="websites/view_competencestate.aspx">
+      <publishTime>07/03/2017 08:44:11</publishTime>
+    </File>
+    <File Include="websites/view_domainmodel.aspx">
+      <publishTime>06/28/2017 11:16:53</publishTime>
     </File>
   </ItemGroup>
 </Project>

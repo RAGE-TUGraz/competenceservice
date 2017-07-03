@@ -42,6 +42,11 @@ namespace competenceservice
         {
             Response.Redirect("websites/view_domainmodel.aspx");
         }
+
+        protected void buttonviewcompetencestateClicked(object sender, EventArgs e)
+        {
+            Response.Redirect("websites/view_competencestate.aspx");
+        }
     }
 }
 

@@ -46,16 +46,21 @@ namespace competenceservice
             #region WebMethods
 
             /// <summary>
-            /// Method invoked before each route, checks the authentification
+            /// Method invoked before each route, checks the authentification and if database is running
             /// </summary>
             Before += (ctx) => {
+                //check if database is running
+                if (!CompetenceFramework.canConnectToDatabase())
+                    return "<failure> Can not connect to Database. Is it runing? Is database present? </failure>";
+
                 string[] splits = getUsernameAndPwdFromRequest(Request);
                 if(splits.Length<2)
-                    return "<failure> authentification failed </failure>";
+                    return "<failure> authentification failed1 </failure>";
                 string username = splits[0];
                 string password = splits[1];
                 if(!CompetenceFramework.isUserValid(username, password))
-                    return "<failure> authentification failed </failure>";
+                    return "<failure> authentification failed2 </failure>";
+
                 return null;
             };
 

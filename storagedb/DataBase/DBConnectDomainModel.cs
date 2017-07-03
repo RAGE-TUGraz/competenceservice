@@ -95,7 +95,9 @@ namespace storagedb
 			    //close connection
 			    this.CloseConnection();
 		    }
-	    }
+            
+             enterTestData();
+        }
 
 	    //open connection to database
 	    private bool OpenConnection()
@@ -383,9 +385,7 @@ namespace storagedb
 		        } 
 		    */
 	    }
-
-
-
+        
 	    public void enterTestData(){
             if (doesIdExist("1"))
                 return;
@@ -400,10 +400,7 @@ namespace storagedb
             structure += "</relations><updatelevels><level direction=\"up\" power=\"low\" xi=\"1.2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"up\" power=\"medium\" xi=\"2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"up\" power=\"high\" xi=\"4\" minonecompetence=\"true\" maxonelevel=\"false\" /><level direction=\"down\" power=\"low\" xi=\"1.2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"down\" power=\"medium\" xi=\"2\" minonecompetence=\"false\" maxonelevel=\"true\" /><level direction=\"down\" power=\"high\" xi=\"4\" minonecompetence=\"true\" maxonelevel=\"false\" /></updatelevels></domainmodel>";
             Insert ("1",structure);
 	    }
-
-
-
-
+        
         public string getDomainModelById(string id)
         {
             List<string> whereStatements = new List<string>();

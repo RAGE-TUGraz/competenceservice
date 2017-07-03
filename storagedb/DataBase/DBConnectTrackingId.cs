@@ -96,6 +96,21 @@ namespace storagedb
 			}
 		}
 
+        /// <summary>
+        /// Method for checking if MySql Server is running
+        /// </summary>
+        /// <returns></returns>
+        public bool canConnectToDatabase()
+        {
+            if (OpenConnection())
+            {
+                CloseConnection();
+                return true;
+            }
+
+            return false;
+        }
+
 		//open connection to database
 		private bool OpenConnection()
 		{

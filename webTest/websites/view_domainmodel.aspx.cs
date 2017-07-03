@@ -17,6 +17,18 @@ namespace webTest.websites
         protected void buttonloaddomainmodelClicked(object sender, EventArgs e)
         {
             //load dm with id and display it in textbox
+            string dmid = dmidinput.Text;
+            string dmstructure = competenceframework.CompetenceFramework.getdm(dmid);
+            if (dmstructure == null)
+            {
+                inputstructure.Text = "Id unknown!";
+                return;
+            }
+            inputstructure.Text = dmstructure;
+            string dm = "\"" + dmstructure.Replace("\"", "'")+ "\"";
+            Page.ClientScript.RegisterStartupScript(GetType(),"MyKey", "drawDomainModel(" + dm+");", true);
+
+
         }
     }
 }
