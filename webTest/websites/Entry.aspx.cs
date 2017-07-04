@@ -33,6 +33,13 @@ namespace competenceservice
 	
 	public partial class Entry : System.Web.UI.Page
 	{
+        protected void Page_Load(object sender, EventArgs e)
+        {
+            //tmp automatic redirect view competence state:
+            Response.Redirect("view_competencestate.aspx");
+        }
+
+
         protected void buttonloadenterdmClicked(object sender, EventArgs e)
         {
             Response.Redirect("enter_domainmodel.aspx");

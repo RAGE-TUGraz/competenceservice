@@ -84,6 +84,7 @@ namespace storagedb
         {
             initialize();
             idLength = Math.Min(idLength,50);
+            createExampleTrackingId();
         }
         #endregion
         #region Properties
@@ -101,6 +102,30 @@ namespace storagedb
 
         #endregion
         #region Utilitymethods
+
+        /// <summary>
+        /// Method creating a tracking id 1 for domain model with id 1 - for testing
+        /// </summary>
+        public void createExampleTrackingId()
+        {
+            if (trackingiddb.doesTrackingIdExist("1"))
+                return;
+
+            //create new tracking id - std
+            DomainModel dm = DomainModel.getDMFromXmlString(getDomainModelById("1"));
+            CompetenceProbabilities cp = CompetenceHandler.Instance.createInitialCompetenceProbabilities(dm);
+
+            string csid = competencestatedb.Insert(cp.toXmlString());
+            if (csid == null)
+                throw new Exception("Cannot store competencestate in Database Handler!");
+
+            trackingiddb.Insert("1", "1", csid);
+
+            //create competence development table
+            competencedevelopmentdb.createTable("1");
+            //enter first dataset into competence development table
+            competencedevelopmentdb.Insert("1", cp.toXmlString());
+        }
         
         //changes the default server access information, if value not null
         public void setDatabaseAccessData(string newServer, string newDatabase, string newUid, string newPassword)

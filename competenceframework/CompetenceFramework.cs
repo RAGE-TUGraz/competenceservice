@@ -229,6 +229,20 @@ namespace competenceframework
             return DatabaseHandler.Instance.canConnectToDatabase();
         }
 
+        /// <summary>
+        /// Method returning the Domain model id to an tracking id
+        /// </summary>
+        /// <param name="tid">tracking id</param>
+        /// <returns>domain model id</returns>
+        public static string getDomainModelIdByTrackingId(string tid)
+        {
+            string[] data = DatabaseHandler.Instance.getDomainmodelIdAndCompetenceProbabilityId(tid);
+            if (data == null)
+                return null;
+
+            return data[0];
+        }
+
         #endregion Methods
     }
 }

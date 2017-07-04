@@ -2,7 +2,10 @@ drawDomainModel = function (domMod) {
     domainModelObject = new DomainModelObject(domMod);
     domainModelObject.drawDomainModel("graph");
     domainModelObject.displayNodeInformationOnClick("nodeInfo");
-    domainModelObject.displayCompetenceState(cs);
+}
+
+drawCompetenceState = function (comState) {
+    domainModelObject.displayCompetenceState(comState);
 }
 
 function DomainModelObject(domainModelText) {
@@ -21,7 +24,8 @@ function DomainModelObject(domainModelText) {
         //get competence information by id
         var html = "";
         html += "<font size='1'>Competence: &nbsp &nbsp</font><font size='5'> " + nodeId.toUpperCase() + "</font><br>";
-        html += "<font size='1'>Value &nbsp &nbsp &nbsp &nbsp &nbsp : &nbsp &nbsp</font> <font size='5'>" + Math.round(100 * domainModelObject.competenceState.getValueById(nodeId)) / 100 +"</font>";
+        if (domainModelObject.competenceState != null)
+            html += "<font size='1'>Value &nbsp &nbsp &nbsp &nbsp &nbsp : &nbsp &nbsp</font> <font size='5'>" + Math.round(100 * domainModelObject.competenceState.getValueById(nodeId)) / 100 +"</font>";
         return html;
     }
     this.displayNodeInformationOnClick = function (nodeInformationDiv) {

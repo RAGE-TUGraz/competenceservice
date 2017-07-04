@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="competenceservice.Login" ValidateRequest="false" %>
+
 <!DOCTYPE html>
 <link rel="stylesheet" type="text/css" href="style.css" />
 <html>
