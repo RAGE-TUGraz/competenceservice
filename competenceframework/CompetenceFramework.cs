@@ -50,6 +50,18 @@ namespace competenceframework
         #region Constructor
         private CompetenceFramework()
         {
+            //temp: create tracking history
+            /*
+            EvidenceSet es = new EvidenceSet();
+            Evidence e1 = new Evidence();
+            e1.type = EvidenceType.Competence;
+            e1.competenceId = "C8";
+            e1.direction = true;
+            e1.evidencePower = EvidencePower.Medium;
+            es.evidences = new List<Evidence>();
+            es.evidences.Add(e1);
+            updatecompetencestate("1",es.toXmlString());
+            */
         }
         #endregion
         #region Properties
@@ -176,7 +188,7 @@ namespace competenceframework
 
            
             //store cs
-            return DatabaseHandler.Instance.performCompetenceProbabilityUpdate(tid, ids[1],newcp.toXmlString());
+            return DatabaseHandler.Instance.performCompetenceProbabilityUpdate(tid, ids[1],newcp.toXmlString(), evidence);
         }
 
         /// <summary>
@@ -241,6 +253,19 @@ namespace competenceframework
                 return null;
 
             return data[0];
+        }
+
+        /// <summary>
+        /// Method returning the update history of a tracking id
+        /// </summary>
+        /// <param name="tid"></param>
+        /// <returns></returns>
+        public static string getTrackingHistory(string tid)
+        {
+            UpdateHistory uh = DatabaseHandler.Instance.getTrackingHistory(tid);
+            if (uh == null)
+                return null;
+            return uh.toXmlString();
         }
 
         #endregion Methods

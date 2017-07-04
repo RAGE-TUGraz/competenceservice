@@ -56,7 +56,7 @@ namespace storagedb
         /// <summary>
         /// The tracking id database handler instance.
         /// </summary>
-        private  DBConnectTrackingId trackingiddb;
+        private DBConnectTrackingId trackingiddb;
 
         /// <summary>
         /// The user database handler instance.
@@ -76,7 +76,7 @@ namespace storagedb
         /// <summary>
         /// The competence development database handler instance.
         /// </summary>
-        private  DBConnectCompetenceDevelopment competencedevelopmentdb;
+        internal DBConnectCompetenceDevelopment competencedevelopmentdb;
 
         #endregion
         #region Constructor
@@ -124,7 +124,7 @@ namespace storagedb
             //create competence development table
             competencedevelopmentdb.createTable("1");
             //enter first dataset into competence development table
-            competencedevelopmentdb.Insert("1", cp.toXmlString());
+            competencedevelopmentdb.Insert("1", cp.toXmlString(),"initial Competencestate");
         }
         
         //changes the default server access information, if value not null
@@ -318,7 +318,7 @@ namespace storagedb
             //create competence development table
             competencedevelopmentdb.createTable(tid);
             //enter first dataset into competence development table
-            competencedevelopmentdb.Insert(tid,ps.toXmlString());
+            competencedevelopmentdb.Insert(tid,ps.toXmlString(), "initial Competencestate");
 
 
             return tid;
@@ -375,10 +375,10 @@ namespace storagedb
         /// <param name="competenceProbabiltyId"> id of the entry</param>
         /// <param name="competenceProbability"> new value of the entry</param>
         /// <returns></returns>
-        public bool performCompetenceProbabilityUpdate(string tid, string competenceProbabiltyId, string competenceProbability)
+        public bool performCompetenceProbabilityUpdate(string tid, string competenceProbabiltyId, string competenceProbability, string evidence)
         {
             //store new value in competence development table
-            competencedevelopmentdb.Insert(tid, competenceProbability);
+            competencedevelopmentdb.Insert(tid, competenceProbability, evidence);
 
             return competencestatedb.Update(competenceProbabiltyId, competenceProbability);
         }
@@ -451,6 +451,13 @@ namespace storagedb
         public bool canConnectToDatabase()
         {
             return trackingiddb.canConnectToDatabase();
+        }
+
+        public UpdateHistory getTrackingHistory(string tid)
+        {
+            if (!trackingiddb.doesTrackingIdExist(tid))
+                return null;
+            return new UpdateHistory(tid);
         }
 
         #endregion Methods

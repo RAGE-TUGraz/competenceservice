@@ -68,7 +68,6 @@
   <ItemGroup>
     <Content Include="Login.aspx" />
     <Content Include="Global.asax" />
-    <Content Include="websites\styleEntry.css" />
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>

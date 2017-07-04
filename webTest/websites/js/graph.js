@@ -252,6 +252,7 @@ function Graph(div) {
             this.lastTimeNodeClicked = performance.now();
             $("#" + this.nodeClickDiv).html(this.nodeClickFunction(this.mousedownNodeId));
             this.highlightNode(this.mousedownNodeId);
+
         }
     }
     this.highlightNode = function (nodeId) {

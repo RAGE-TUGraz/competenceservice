@@ -22,10 +22,10 @@ namespace webTest.websites
             string competenceProbabilities = competenceframework.CompetenceFramework.getcpByTid(tid);
             if (competenceProbabilities == null)
             {
-                outputcs.Text = "Id unknown";
+                //outputcs.Text = "Id unknown";
                 return;
             }
-            outputcs.Text = competenceProbabilities;
+            //outputcs.Text = competenceProbabilities;
 
             string dmid = competenceframework.CompetenceFramework.getDomainModelIdByTrackingId(tid);
             string dmstring = competenceframework.CompetenceFramework.getdm(dmid);
@@ -35,29 +35,10 @@ namespace webTest.websites
             Page.ClientScript.RegisterStartupScript(GetType(), "MyKey", "drawDomainModel(" + dm + ");", true);
             Page.ClientScript.RegisterStartupScript(GetType(), "MyKey2", "drawCompetenceState(" + cp + ");", true);
 
-
-            //timeline basic @ http://visjs.org/timeline_examples.html
-            Page.ClientScript.RegisterStartupScript(GetType(), "MyKey3", createTimelineJSCode(), true);
-
-        }
-
-        private string createTimelineJSCode()
-        {
-            string js = "var container = document.getElementById('visualization');";
-            js += "var items = new vis.DataSet([";
-            js += createOneTimelineEntry("1", "item1", "2014-04-20 20:15:20") + "," + createOneTimelineEntry("2", "item2", "2014-04-20 05:15:20") + ",";
-            js += createOneTimelineEntry("3", "item3", "2014-04-20 19:15:55") + "," + createOneTimelineEntry("4", "item4", "2014-04-20 10:15:20") + ",";
-            js += createOneTimelineEntry("5", "item5", "2014-04-20 18:15:20") + "," + createOneTimelineEntry("6", "item6", "2014-04-20 15:15:20");
-            js += " ]); ";
-            js += "var options = {};";
-            js += "var timeline = new vis.Timeline(container, items, options);";
-            return js;
-        }
-
-        //start format: 2014-04-18 20:15:20
-        private string createOneTimelineEntry(string id, string content, string start)
-        {
-            return "{id:"+id+", content: '"+content+"', start:'"+start+ "', type: 'point'}";
+            //history, timeline basic @ http://visjs.org/timeline_examples.html
+            string updateHistory = "\"" + competenceframework.CompetenceFramework.getTrackingHistory(tid).Replace("\"", "'") + "\"";
+            Page.ClientScript.RegisterStartupScript(GetType(), "MyKey2.5", "drawUpdateHistory(" + updateHistory + ");", true);
+            
         }
     }
 }

@@ -87,7 +87,7 @@ namespace storagedb
 
         public void createTable(string tid)
         {
-            string statement = "create table IF NOT EXISTS compdev_"+tid+" (id INT NOT NULL AUTO_INCREMENT, competencestate TEXT, datetime TEXT, PRIMARY KEY(id));";
+            string statement = "create table IF NOT EXISTS compdev_"+tid+" (id INT NOT NULL AUTO_INCREMENT, evidence TEXT, competencestate TEXT, datetime TEXT, PRIMARY KEY(id));";
 
             //open connection
             if (this.OpenConnection(tid) == true)
@@ -155,11 +155,11 @@ namespace storagedb
         /// else - id of inserted record
         /// </returns>
         /// <param name="competencestate">xml representation of the competence state</param>
-        public string Insert(string tid, string competencestate)
+        public string Insert(string tid, string competencestate, string evidence)
         {
             string retVal = null;
 
-            string query = "INSERT INTO compdev_" + tid + " (competencestate, datetime) VALUES('" + competencestate + "',UTC_TIMESTAMP())";
+            string query = "INSERT INTO compdev_" + tid + " (evidence, competencestate, datetime) VALUES('"+evidence+"','" + competencestate + "',UTC_TIMESTAMP())";
 
             //open connection
             if (this.OpenConnection(tid) == true)
@@ -226,10 +226,11 @@ namespace storagedb
             }
 
             //Create a list to store the result
-            List<string>[] list = new List<string>[3];
+            List<string>[] list = new List<string>[4];
             list[0] = new List<string>();
             list[1] = new List<string>();
             list[2] = new List<string>();
+            list[3] = new List<string>();
 
             //Open connection
             if (this.OpenConnection(tid) == true)
@@ -245,6 +246,7 @@ namespace storagedb
                     list[0].Add(dataReader["id"] + "");
                     list[1].Add(dataReader["competencestate"] + "");
                     list[2].Add(dataReader["datetime"] + "");
+                    list[3].Add(dataReader["evidence"] + "");
                 }
 
                 //close Data Reader

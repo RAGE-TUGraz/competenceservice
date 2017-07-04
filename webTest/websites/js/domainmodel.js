@@ -6,6 +6,26 @@ drawDomainModel = function (domMod) {
 
 drawCompetenceState = function (comState) {
     domainModelObject.displayCompetenceState(comState);
+    if (graph.highlightedNode != null)
+        graph.nodeClicked();
+}
+
+drawUpdateHistory = function (udateh) {
+    uh = new UpdateHistory(udateh);
+    var container = document.getElementById('visualization');
+    //var items = new vis.DataSet([{ id: 1, content: uh.entries[0].evidence, start: uh.entries[0].datetime, type: 'point' }, { id: 2, content: uh.entries[1].evidence, start: uh.entries[1].datetime, type: 'point' }]); 
+    var items = new vis.DataSet();
+    for (var i = 0; i < uh.entries.length; i++) {
+        items.add([{ id: i, content: uh.entries[i].evidenceSet.getDisplayText(), start: uh.entries[i].datetime, type: 'point' }]);
+    }
+    var options = {};
+    var timeline = new vis.Timeline(container, items, options);
+
+    timeline.on('click', function (properties) {
+        if (properties.item != null) {
+            drawCompetenceState(uh.entries[properties.item].competenceStateString);
+        }
+    });
 }
 
 function DomainModelObject(domainModelText) {
@@ -66,6 +86,10 @@ function DomainModelObject(domainModelText) {
         for (var i = 0; i < this.competenceState.competencePairs.length; i++) {
             graph.colorNodeById(this.competenceState.competencePairs[i].id, this.competenceState.competencePairs[i].value, this.colorNode);
         }
+        this.reprintNodeInformationDiv();
+    };
+    this.reprintNodeInformationDiv = function () {
+
     };
 }
 
@@ -221,4 +245,134 @@ function CompetenceState(competenceStateString) {
         }
     };
     this.initialize(competenceStateString);
+}
+
+
+function UpdateHistory(updateHistoryXml) {
+    this.trackingid;
+    this.entries = [];
+    this.initialize = function (updateHistoryxml) {
+        var xmlDoc = $.parseXML(updateHistoryxml);
+        var $xml = $(xmlDoc);
+
+        //store transition probability
+        this.trackingid = parseFloat($xml.find("updatehistory")[0].getAttribute("trackingid"));
+
+        /*Add competences*/
+        var $entries = $xml.find("updatehistoryentry");
+        for (var i = 0; i < ($entries).length; i++) {
+            this.entries.push(new UpdateHistoryEntry($entries[i]));
+        }
+    };
+    this.initialize(updateHistoryXml);
+
+
+    function UpdateHistoryEntry(UpdateHistoryEntryXml) {
+        this.datetime;
+        this.evidenceSet;
+        this.competencestate;
+        this.competenceStateString;
+        this.initialize = function (UpdateHistoryEntryxml) {
+            
+            this.datetime = UpdateHistoryEntryxml.getAttribute("datetimeentry");
+            this.evidenceSet = new EvidenceSet($(UpdateHistoryEntryxml).find("evidenceentry").html().replace(/&lt;/g, "<").replace(/&gt;/g, ">"));
+            this.competenceStateString = $(UpdateHistoryEntryxml).find("competencestateentry").html().replace(/&lt;/g, "<").replace(/&gt;/g, ">");
+            this.competencestate = new CompetenceState(this.competenceStateString); 
+        };
+        this.initialize(UpdateHistoryEntryXml);
+    }
+
+    function EvidenceSet(dataInput) {
+        this.initial = false;
+        this.evidences=[];
+        this.initialize = function (data) {
+            if (data == "initial Competencestate") {
+                this.initial = true;
+                return;
+            }
+            
+            var xmlDoc = $.parseXML(data);
+            var $xml = $(xmlDoc);
+            var elements = $xml.find("evidence");
+            for (var i = 0; i < elements.length; i++) {
+                this.evidences.push(new Evidence(elements[i]));
+            }
+        };
+        this.initialize(dataInput);
+        this.getDisplayText = function () {
+            if (this.initial) {
+                return "initial state";
+            }
+            var type = this.evidences[0].type;
+            for (var i = 0; i < this.evidences.length; i++) {
+                if (type != this.evidences[i].type) {
+                    return "mixed update";
+                }
+            }
+            if (type == "Competence") {
+                var competences = ""
+                for (var i = 0; i < this.evidences.length; i++) {
+                    if (i != 0)
+                        competences += ",";
+                    competences+="(" + this.evidences[i].competenceid + "," + this.evidences[i].getUpdateInfoToDisplay()+")";
+                }
+                return "Competence update ["+competences+"]";
+            }
+            if (type == "Activity") {
+                var activities = []
+                for (var i = 0; i < this.evidences.length; i++) {
+                    activities.push(this.evidences[i].activityid);
+                }
+                return "Activity update [" + activities.toString() + "]";
+            }
+            if (type == "Gamesituation") {
+                var gs = ""
+                for (var i = 0; i < this.evidences.length; i++) {
+                    ga += "(" + this.evidences[i].gamesituationid + "," + this.evidences[i].getUpdateInfoToDisplay() + ")";
+                }
+                return "Gamesituation update [" + competences + "]";
+            }
+            return "Update unknown";
+        }
+    }
+
+    function Evidence(dataInput) {
+        this.type;
+        this.competenceid;
+        this.power;
+        this.direction;
+        this.gamesituationid;
+        this.activityid;
+        this.initialize = function (data) {
+
+            this.type = $(data).find("type").html();
+            if (this.type == "Competence") {
+                this.competenceid = $(data).find("competenceid").html();
+                this.power = $(data).find("power").html();
+                this.direction = $(data).find("direction").html();
+            } else if (this.type == "Activity") {
+                this.activityid = $(data).find("activity").html();
+            } else if (this.type == "Gamesituation") {
+                this.gamesituationid = $(data).find("gamesituation").html();
+            }
+        };
+        this.initialize(dataInput);
+        this.getUpdateInfoToDisplay = function(){
+            if (this.type == "Gamesituation") {
+                if (this.direction == "true")
+                    return "+";
+                else
+                    return "-";
+            } else if (this.type == "Competence") {
+                var sign = (this.direction == "true") ? "+" : "-";
+                if (this.power == "Low") {
+                    return sign;
+                } else if (this.power == "Medium") {
+                    return sign+sign;
+                } else if (this.power == "High") {
+                    return sign+sign+sign;
+                }
+            }
+        };
+    }
 }
