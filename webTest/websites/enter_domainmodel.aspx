@@ -7,7 +7,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>Enter Domainmodel</title>
+    <link rel="shortcut icon" type="image/ico" href="images/tabpic.ico" />
     <script src='js/menu.js'></script>
 </head>
 <body>

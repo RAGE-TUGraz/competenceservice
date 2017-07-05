@@ -8,7 +8,8 @@
 
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head runat="server">
-    <title></title>
+    <title>View Competenecstate</title>
+    <link rel="shortcut icon" type="image/ico" href="images/tabpic.ico" />
     <script src='js/jquery-3.2.1.min.js'></script>
     <script src='js/domainmodel.js'> </script>
     <script src='js/raphael-min.js'></script>

@@ -5,7 +5,8 @@
 <link rel="stylesheet" type="text/css" href="css/general.css" />
 <html>
 <head runat="server">
-	<title>Default</title>
+	<title>Competence Service Start</title>
+    <link rel="shortcut icon" type="image/ico" href="images/tabpic.ico" />
 	<meta charset="UTF-8">
     <script src='js/menu.js'></script>
     <script src='js/jquery-3.2.1.min.js'></script>

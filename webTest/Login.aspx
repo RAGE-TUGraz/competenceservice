@@ -5,7 +5,8 @@
 <link rel="stylesheet" type="text/css" href="websites/css/general.css" />
 <html>
 <head runat="server">
-	<title>Default</title>
+	<title>Competence Service Login</title>
+    <link rel="shortcut icon" type="image/ico" href="images/tabpic.ico" />
 	<meta charset="UTF-8">
 </head>
 <body>
