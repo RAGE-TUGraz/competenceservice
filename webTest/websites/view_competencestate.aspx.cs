@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
+using System.Web.Security;
 using System.Web.UI;
-using System.Web.UI.WebControls;
 
 namespace webTest.websites
 {
@@ -12,8 +9,8 @@ namespace webTest.websites
         protected void Page_Load(object sender, EventArgs e)
         {
             //tmp: load tracking id 1
-            trackingidinput.Text = "1";
-            buttonloadcompetenceStateClicked(null,null);
+            //trackingidinput.Text = "1";
+            //buttonloadcompetenceStateClicked(null,null);
         }
 
         protected void buttonloadcompetenceStateClicked(object sender, EventArgs e)
@@ -32,6 +29,7 @@ namespace webTest.websites
 
             string dm = "\"" + dmstring.Replace("\"", "'") + "\"";
             string cp = "\"" + competenceProbabilities.Replace("\"", "'") + "\"";
+            Page.ClientScript.RegisterStartupScript(GetType(), "MyKey0", "showVisualisation();", true);
             Page.ClientScript.RegisterStartupScript(GetType(), "MyKey", "drawDomainModel(" + dm + ");", true);
             Page.ClientScript.RegisterStartupScript(GetType(), "MyKey2", "drawCompetenceState(" + cp + ");", true);
 
@@ -40,5 +38,33 @@ namespace webTest.websites
             Page.ClientScript.RegisterStartupScript(GetType(), "MyKey2.5", "drawUpdateHistory(" + updateHistory + ");", true);
             
         }
+
+        #region sidenavi
+        protected void btnEnterDomainmodel(object sender, EventArgs e)
+        {
+            Response.Redirect("enter_domainmodel.aspx");
+        }
+
+        protected void btnViewDomainmodel(object sender, EventArgs e)
+        {
+            Response.Redirect("view_domainmodel.aspx");
+        }
+
+        protected void btnViewCompetencestate(object sender, EventArgs e)
+        {
+            Response.Redirect("view_competencestate.aspx");
+        }
+
+        protected void btnEnterEntry(object sender, EventArgs e)
+        {
+            Response.Redirect("Entry.aspx");
+        }
+
+        protected void btnLogout(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            Response.Redirect(@"..\Login.aspx");
+        }
+        #endregion
     }
 }

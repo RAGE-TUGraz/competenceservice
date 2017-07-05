@@ -12,13 +12,14 @@ drawCompetenceState = function (comState) {
 
 drawUpdateHistory = function (udateh) {
     uh = new UpdateHistory(udateh);
+    //timeline: see http://visjs.org/timeline_examples.html
     var container = document.getElementById('visualization');
     //var items = new vis.DataSet([{ id: 1, content: uh.entries[0].evidence, start: uh.entries[0].datetime, type: 'point' }, { id: 2, content: uh.entries[1].evidence, start: uh.entries[1].datetime, type: 'point' }]); 
     var items = new vis.DataSet();
     for (var i = 0; i < uh.entries.length; i++) {
         items.add([{ id: i, content: uh.entries[i].evidenceSet.getDisplayText(), start: uh.entries[i].datetime, type: 'point' }]);
     }
-    var options = {};
+    var options = {"height": "200px", "stackEvents":false};
     var timeline = new vis.Timeline(container, items, options);
 
     timeline.on('click', function (properties) {
@@ -38,8 +39,8 @@ function DomainModelObject(domainModelText) {
 
         var element = $("#" + domainModelObject.nodeInformationDiv);
         //element.css.style.borderColor = "#ff0000";
-        element.css("border-color", "black");
-        element.css("border", "solid");
+        //element.css("border-color", "black");
+        element.css("border", "solid 1px black");
 
         //get competence information by id
         var html = "";

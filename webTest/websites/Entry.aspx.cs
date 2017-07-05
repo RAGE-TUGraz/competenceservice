@@ -27,6 +27,7 @@
 */
 
 using System;
+using System.Web.Security;
 
 namespace competenceservice
 {
@@ -36,7 +37,7 @@ namespace competenceservice
         protected void Page_Load(object sender, EventArgs e)
         {
             //tmp automatic redirect view competence state:
-            Response.Redirect("view_competencestate.aspx");
+            Response.Redirect("enter_domainmodel.aspx");
         }
 
 
@@ -54,6 +55,34 @@ namespace competenceservice
         {
             Response.Redirect("view_competencestate.aspx");
         }
+
+        #region sidenavi
+        protected void btnEnterDomainmodel(object sender, EventArgs e)
+        {
+            Response.Redirect("enter_domainmodel.aspx");
+        }
+
+        protected void btnViewDomainmodel(object sender, EventArgs e)
+        {
+            Response.Redirect("view_domainmodel.aspx");
+        }
+
+        protected void btnViewCompetencestate(object sender, EventArgs e)
+        {
+            Response.Redirect("view_competencestate.aspx");
+        }
+
+        protected void btnEnterEntry(object sender, EventArgs e)
+        {
+            Response.Redirect("Entry.aspx");
+        }
+
+        protected void btnLogout(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            Response.Redirect(@"..\Login.aspx");
+        }
+        #endregion
     }
 }
 

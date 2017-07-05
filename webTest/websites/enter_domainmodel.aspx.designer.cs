@@ -22,13 +22,49 @@ namespace webTest.Websites {
         protected global::System.Web.UI.HtmlControls.HtmlForm form1;
         
         /// <summary>
-        /// button2 control.
+        /// menubtndisplayEnteryPage control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button2;
+        protected global::System.Web.UI.WebControls.Button menubtndisplayEnteryPage;
+        
+        /// <summary>
+        /// menubtndisplayEnterDomainModel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button menubtndisplayEnterDomainModel;
+        
+        /// <summary>
+        /// menubtndisplayDomainModel control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button menubtndisplayDomainModel;
+        
+        /// <summary>
+        /// menubtndisplayCompetenceState control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button menubtndisplayCompetenceState;
+        
+        /// <summary>
+        /// menubtlogout control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button menubtlogout;
         
         /// <summary>
         /// inputstructure control.

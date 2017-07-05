@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace webTest.Websites
 {
@@ -25,7 +21,39 @@ namespace webTest.Websites
             //int retVal = DatabaseHandler.Instance.insertdomainmodel(inputname.Text,inputpassword.Text,inputstructure.Text);
             string retVal = competenceframework.CompetenceFramework.storedm(inputstructure.Text);
 
-            inputstructure.Text = "structure stored with id " + retVal;
+            if(retVal==null)
+                inputstructure.Text = "structure cannot be stored - it is not valid!";
+            else
+                inputstructure.Text = "structure stored with id " + retVal;
         }
+
+        #region sidenavi
+        protected void btnEnterDomainmodel(object sender, EventArgs e)
+        {
+            Response.Redirect("enter_domainmodel.aspx");
+        }
+
+        protected void btnViewDomainmodel(object sender, EventArgs e)
+        {
+            Response.Redirect("view_domainmodel.aspx");
+        }
+
+        protected void btnViewCompetencestate(object sender, EventArgs e)
+        {
+            Response.Redirect("view_competencestate.aspx");
+        }
+
+        protected void btnEnterEntry(object sender, EventArgs e)
+        {
+            Response.Redirect("Entry.aspx");
+        }
+
+        protected void btnLogout(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            Response.Redirect(@"..\Login.aspx");
+        }
+        #endregion
+
     }
 }

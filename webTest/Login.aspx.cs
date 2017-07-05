@@ -61,11 +61,6 @@ namespace competenceservice
                 lblInvalid.Text = "Username/Password incorrect!";
             }
         }
-
-        protected void btnLogout_Click(object sender, EventArgs e)
-        {
-            FormsAuthentication.SignOut();
-        }
     }
 }
 

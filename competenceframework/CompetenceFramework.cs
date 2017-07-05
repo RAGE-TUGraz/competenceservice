@@ -118,7 +118,10 @@ namespace competenceframework
         /// <returns> null if unsuccessful, the id otherwise</returns>
         public static string storedm(string dm)
         {
-            //structure name/password omitted in this version
+            //check validity of the structure
+            if (DomainModel.getDMFromXmlString(dm) == null)
+                return null;
+
             return DatabaseHandler.Instance.insertdomainmodel(dm);
         }
 

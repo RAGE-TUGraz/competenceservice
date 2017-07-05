@@ -1,9 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.UI;
-using System.Web.UI.WebControls;
+using System.Web.Security;
 
 namespace webTest.websites
 {
@@ -21,14 +18,43 @@ namespace webTest.websites
             string dmstructure = competenceframework.CompetenceFramework.getdm(dmid);
             if (dmstructure == null)
             {
-                inputstructure.Text = "Id unknown!";
+                //inputstructure.Text = "Id unknown!";
                 return;
             }
-            inputstructure.Text = dmstructure;
+            //inputstructure.Text = dmstructure;
             string dm = "\"" + dmstructure.Replace("\"", "'")+ "\"";
+            Page.ClientScript.RegisterStartupScript(GetType(), "MyKey0", "showVisualisation();", true);
             Page.ClientScript.RegisterStartupScript(GetType(),"MyKey", "drawDomainModel(" + dm+");", true);
 
 
         }
+
+        #region sidenavi
+        protected void btnEnterDomainmodel(object sender, EventArgs e)
+        {
+            Response.Redirect("enter_domainmodel.aspx");
+        }
+
+        protected void btnViewDomainmodel(object sender, EventArgs e)
+        {
+            Response.Redirect("view_domainmodel.aspx");
+        }
+
+        protected void btnViewCompetencestate(object sender, EventArgs e)
+        {
+            Response.Redirect("view_competencestate.aspx");
+        }
+
+        protected void btnEnterEntry(object sender, EventArgs e)
+        {
+            Response.Redirect("Entry.aspx");
+        }
+
+        protected void btnLogout(object sender, EventArgs e)
+        {
+            FormsAuthentication.SignOut();
+            Response.Redirect(@"..\Login.aspx");
+        }
+        #endregion
     }
 }
