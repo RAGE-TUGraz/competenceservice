@@ -58,6 +58,15 @@ namespace webTest.Websites {
         protected global::System.Web.UI.WebControls.Button menubtndisplayCompetenceState;
         
         /// <summary>
+        /// menubtnentertestdata control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button menubtnentertestdata;
+        
+        /// <summary>
         /// menubtlogout control.
         /// </summary>
         /// <remarks>
@@ -65,23 +74,5 @@ namespace webTest.Websites {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button menubtlogout;
-        
-        /// <summary>
-        /// inputstructure control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox inputstructure;
-        
-        /// <summary>
-        /// button1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button button1;
     }
 }

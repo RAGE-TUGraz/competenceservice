@@ -29,6 +29,9 @@
 
           <asp:Button runat="server" id="menubtndisplayCompetenceState" style="display:none" onclick="btnViewCompetencestate" />
           <a href="#" onclick="document.getElementById('<%= menubtndisplayCompetenceState.ClientID %>').click()">View Competencestate</a>
+            
+          <asp:Button runat="server" id="menubtnentertestdata" style="display:none" onclick="btnEnterTestdata" />
+          <a href="#" onclick="document.getElementById('<%= menubtnentertestdata.ClientID %>').click()">Enter Testdata</a>
 
           <asp:Button runat="server" id="menubtlogout" style="display:none" onclick="btnLogout" />
           <a href="#" onclick="document.getElementById('<%= menubtlogout.ClientID %>').click()">Logout</a>
@@ -37,12 +40,8 @@
 
         <div id="main">
             <div id="headingdiv">Enter Domainmodel</div>
-	        <br>
-
-	        Structure:<br>
-	        <asp:TextBox id="inputstructure" TextMode="MultiLine" runat="server" rows="10" cols="40"/>
-	        <br>
-	        <asp:Button id="button1" runat="server" Text="Submit!"  OnClick="button1Clicked" />
+	        
+            <p>Coming soon!</p>
         </div>
 	</form>
 </body>

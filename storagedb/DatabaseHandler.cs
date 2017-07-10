@@ -242,7 +242,69 @@ namespace storagedb
             return retStr;
         }
 
+        /// <summary>
+        /// Method updating the competence probabilty value in the database with given date. format:"2017-07-04 10:41:54"
+        /// </summary>
+        /// <param name="competenceProbabiltyId"> id of the entry</param>
+        /// <param name="competenceProbability"> new value of the entry</param>
+        /// <returns></returns>
+        public bool performCompetenceProbabilityUpdate(string tid, string competenceProbabiltyId, string competenceProbability, string evidence, string date)
+        {
+            //store new value in competence development table
+            competencedevelopmentdb.InsertTest(tid, competenceProbability, evidence, date);
 
+            return competencestatedb.UpdateTest(competenceProbabiltyId, competenceProbability, date);
+        }
+
+        /// <summary>
+        /// Method creating a tracking id and competence state (this represents a player) for a given domain model, represented by id
+        /// with given date. format:"2017-07-04 10:41:54"
+        /// </summary>
+        /// <param name="dmid"> id of the domainmodel used to create the trackig id</param>
+        /// <returns>0 if an error occured, the created tracking id otherwise</returns>
+        public string createTrackingId(string dmid, string date)
+        {
+            //load domain model
+            string dmstring = getDomainModelById(dmid);
+            if (dmstring == null)
+                return null;
+
+            //create initial probability structure
+            DomainModel dm = DomainModel.getDMFromXmlString(dmstring);
+            if (dm == null)
+                return null;
+            CompetenceProbabilities ps = CompetenceHandler.Instance.createInitialCompetenceProbabilities(dm);
+            if (ps == null)
+                return null;
+
+            //store cs -> get csid
+            string csid = competencestatedb.InsertTest(ps.toXmlString(),date);
+            if (csid == null)
+                return null;
+
+            //use cs id to create tracking id
+            string tid = createNewTrackingId();
+            if (trackingiddb.Insert(tid, dmid, csid) == null)
+                return null;
+
+            //create competence development table
+            competencedevelopmentdb.createTable(tid);
+            //enter first dataset into competence development table
+            competencedevelopmentdb.InsertTest(tid, ps.toXmlString(), "initial Competencestate",date);
+
+
+            return tid;
+        }
+
+        /// <summary>
+        /// Returns true, if the domain model id exists, false otherwise
+        /// </summary>
+        /// <param name="dmid"></param>
+        /// <returns></returns>
+        public bool doesDomainModelIdExist(string dmid)
+        {
+            return domainmodeldb.doesIdExist(dmid);
+        }
 
         #endregion
         #region Methods

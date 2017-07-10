@@ -5,6 +5,8 @@ getDescription = function (type) {
         return "Description on what to do in 'View Domainmodel'";
     } else if (type == "buttonviewcompetencestate") {
         return "Description on what to do in 'View Competencestate'";
+    } else if (type == "buttonentertestdata") {
+        return "Description on what to do in 'Enter Testdata'";
     }
     if (type == null) {
         return "General description.";

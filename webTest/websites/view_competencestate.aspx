@@ -36,6 +36,9 @@
 
           <asp:Button runat="server" id="menubtndisplayCompetenceState" style="display:none" onclick="btnViewCompetencestate" />
           <a href="#" onclick="document.getElementById('<%= menubtndisplayCompetenceState.ClientID %>').click()">View Competencestate</a>
+            
+          <asp:Button runat="server" id="menubtnentertestdata" style="display:none" onclick="btnEnterTestdata" />
+          <a href="#" onclick="document.getElementById('<%= menubtnentertestdata.ClientID %>').click()">Enter Testdata</a>
 
           <asp:Button runat="server" id="menubtlogout" style="display:none" onclick="btnLogout" />
           <a href="#" onclick="document.getElementById('<%= menubtlogout.ClientID %>').click()">Logout</a>

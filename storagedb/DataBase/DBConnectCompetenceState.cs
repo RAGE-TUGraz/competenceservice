@@ -169,12 +169,42 @@ namespace storagedb
 			return retVal;
 		}
 
-		/// <summary>
-		/// Doeses the user id exist - return true if it does.
-		/// </summary>
-		/// <returns>true, if user id exist, false otherwise.</returns>
-		/// <param name="name">user id</param>
-		public bool doesIdExist(int id){
+        /// <summary>
+        /// Insert a competencestructure with given date. format:"2017-07-04 10:41:54"
+        /// </summary>
+        /// <returns>
+        /// null - error
+        /// else - id of inserted record
+        /// </returns>
+        /// <param name="competencestate">xml representation of the competence state</param>
+        public string InsertTest(string competencestate, string date)
+        {
+            string retVal = null;
+
+            string query = "INSERT INTO competencestates (competencestate, datetime) VALUES('" + competencestate + "','"+date+"')";
+
+            //open connection
+            if (this.OpenConnection() == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                //Execute command
+                cmd.ExecuteNonQuery();
+                retVal = cmd.LastInsertedId.ToString();
+
+                //close connection
+                this.CloseConnection();
+            }
+            return retVal;
+        }
+
+        /// <summary>
+        /// Doeses the user id exist - return true if it does.
+        /// </summary>
+        /// <returns>true, if user id exist, false otherwise.</returns>
+        /// <param name="name">user id</param>
+        public bool doesIdExist(int id){
 			List<string> whereStatements = new List<string> ();
 			whereStatements.Add ("id=" + id + "");
 			List<string>[] list = Select (whereStatements);
@@ -284,6 +314,39 @@ namespace storagedb
 			}
             return true;
 		}
+
+
+        /// <summary>
+        /// Update the competencestate for a user id with given date. format:"2017-07-04 10:41:54"
+        /// </summary>
+        /// <param name="id">Userid.</param>
+        /// <param name="competencestate">Competencestate.</param>
+        public bool UpdateTest(string id, string competencestate, string date)
+        {
+            int idint;
+            if (!Int32.TryParse(id, out idint))
+                return false;
+
+            string query = "UPDATE competencestates SET datetime='"+date+"', competencestate='" + competencestate + "' WHERE id=" + idint + "";
+
+            //Open connection
+            if (this.OpenConnection() == true)
+            {
+                //create mysql command
+                MySqlCommand cmd = new MySqlCommand();
+                //Assign the query using CommandText
+                cmd.CommandText = query;
+                //Assign the connection using Connection
+                cmd.Connection = connection;
+
+                //Execute query
+                cmd.ExecuteNonQuery();
+
+                //close connection
+                this.CloseConnection();
+            }
+            return true;
+        }
 
         //Delete statement
         public bool DeleteById(string id)

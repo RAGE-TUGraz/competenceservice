@@ -37,7 +37,7 @@ namespace competenceservice
         protected void Page_Load(object sender, EventArgs e)
         {
             //tmp automatic redirect view competence state:
-            Response.Redirect("enter_domainmodel.aspx");
+            Response.Redirect("enter_testdata.aspx");
         }
 
 
@@ -54,6 +54,11 @@ namespace competenceservice
         protected void buttonviewcompetencestateClicked(object sender, EventArgs e)
         {
             Response.Redirect("view_competencestate.aspx");
+        }
+
+        protected void buttonentertestdataClicked(object sender, EventArgs e)
+        {
+            Response.Redirect("enter_testdata.aspx");
         }
 
         #region sidenavi
@@ -75,6 +80,11 @@ namespace competenceservice
         protected void btnEnterEntry(object sender, EventArgs e)
         {
             Response.Redirect("Entry.aspx");
+        }
+
+        protected void btnEnterTestdata(object sender, EventArgs e)
+        {
+            Response.Redirect("enter_testdata.aspx");
         }
 
         protected void btnLogout(object sender, EventArgs e)

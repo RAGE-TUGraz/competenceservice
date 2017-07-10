@@ -178,6 +178,36 @@ namespace storagedb
         }
 
         /// <summary>
+        /// Insert a competencestructure with given date. format:"2017-07-04 10:41:54"
+        /// </summary>
+        /// <returns>
+        /// null - error
+        /// else - id of inserted record
+        /// </returns>
+        /// <param name="competencestate">xml representation of the competence state</param>
+        public string InsertTest(string tid, string competencestate, string evidence, string date)
+        {
+            string retVal = null;
+
+            string query = "INSERT INTO compdev_" + tid + " (evidence, competencestate, datetime) VALUES('" + evidence + "','" + competencestate + "','"+date+"')";
+
+            //open connection
+            if (this.OpenConnection(tid) == true)
+            {
+                //create command and assign the query and connection from the constructor
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+
+                //Execute command
+                cmd.ExecuteNonQuery();
+                retVal = cmd.LastInsertedId.ToString();
+
+                //close connection
+                this.CloseConnection(tid);
+            }
+            return retVal;
+        }
+
+        /// <summary>
         /// Doeses the user id exist - return true if it does.
         /// </summary>
         /// <returns>true, if user id exist, false otherwise.</returns>

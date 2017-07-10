@@ -60,6 +60,11 @@ namespace webTest.websites
             Response.Redirect("Entry.aspx");
         }
 
+        protected void btnEnterTestdata(object sender, EventArgs e)
+        {
+            Response.Redirect("enter_testdata.aspx");
+        }
+
         protected void btnLogout(object sender, EventArgs e)
         {
             FormsAuthentication.SignOut();

@@ -30,6 +30,9 @@
 
           <asp:Button runat="server" id="menubtndisplayCompetenceState" style="display:none" onclick="btnViewCompetencestate" />
           <a href="#" onclick="document.getElementById('<%= menubtndisplayCompetenceState.ClientID %>').click()">View Competencestate</a>
+            
+          <asp:Button runat="server" id="menubtnentertestdata" style="display:none" onclick="btnEnterTestdata" />
+          <a href="#" onclick="document.getElementById('<%= menubtnentertestdata.ClientID %>').click()">Enter Testdata</a>
 
           <asp:Button runat="server" id="menubtlogout" style="display:none" onclick="btnLogout" />
           <a href="#" onclick="document.getElementById('<%= menubtlogout.ClientID %>').click()">Logout</a>
@@ -43,6 +46,7 @@
                     <asp:Button class="rectangularbutton button" id="buttonloadenterdm" runat="server" Text="Enter Domainmodel!"  OnClick="buttonloadenterdmClicked" /><br>
                     <asp:Button class="rectangularbutton button" id="buttonviewdomainmodel" runat="server" Text="View Domainmodel!"  OnClick="buttonviewdomainmodelClicked" /><br>
                     <asp:Button class="rectangularbutton button" id="buttonviewcompetencestate" runat="server" Text="View Competencestate!"  OnClick="buttonviewcompetencestateClicked" /><br>
+                    <asp:Button class="rectangularbutton button" id="buttonentertestdata" runat="server" Text="Enter Testdata!"  OnClick="buttonentertestdataClicked" /><br>
                 </div>
                 <div id="seconddiv">
                     <div id="infoDiv">

@@ -108,6 +108,47 @@ namespace competenceframework
             //DatabaseHandler.Instance.setDatabaseAccessData(newServer, newDatabase, newUid, newPassword);
         }
 
+        /// <summary>
+        /// Method for updating the competence state of a payer by trackingid with given date. format:"2017-07-04 10:41:54"
+        /// </summary>
+        /// <param name="tid"> tracking id of the player</param>
+        /// <param name="evidence"> xml representation of the evidence </param>
+        /// <returns>true if the update is successful, false otherwise</returns>
+        public static bool updatecompetencestate(string tid, string evidence, string date)
+        {
+            //get dmid/csid to tracking id
+            string[] ids = DatabaseHandler.Instance.getDomainmodelIdAndCompetenceProbabilityId(tid);
+            if (ids == null)
+                return false;
+
+            //load dm/cp
+            string dmstring = getdm(ids[0]);
+            string cpstring = getcpByCpId(ids[1]);
+            if (dmstring == null || cpstring == null)
+                return false;
+
+            //perform update
+            DomainModel dm = DomainModel.getDMFromXmlString(dmstring);
+            CompetenceProbabilities cp = CompetenceProbabilities.getCPFromXmlString(cpstring);
+            EvidenceSet es = EvidenceSet.getESFromXmlString(evidence);
+            CompetenceProbabilities newcp = CompetenceHandler.Instance.updateCompetenceState(dm, cp, es);
+
+
+            //store cs
+            return DatabaseHandler.Instance.performCompetenceProbabilityUpdate(tid, ids[1], newcp.toXmlString(), evidence, date);
+        }
+
+        /// <summary>
+        /// Method for creating a trackingid for a given domainmodel speziffied by id (dmid) with given date. format:"2017-07-04 10:41:54"
+        /// </summary>
+        /// <param name="dmid"> id of the domain model for which the tracking id is created</param>
+        /// <returns>null if an error occured, the tracking id otherwise</returns>
+        public static string createtrackingid(string dmid, string date)
+        {
+            string tid = DatabaseHandler.Instance.createTrackingId(dmid, date);
+            return tid;
+        }
+
         #endregion
         #region Methods
 
@@ -130,6 +171,9 @@ namespace competenceframework
         /// </summary>
         public static bool deletedm(string dmid)
         {
+            //does dmid exist?
+            if (!DatabaseHandler.Instance.doesDomainModelIdExist(dmid))
+                return false;
 
             List<string> trackingIdsAffected = DatabaseHandler.Instance.getTrackingIdsToDomainModelId(dmid);
             foreach (string tid in trackingIdsAffected)
