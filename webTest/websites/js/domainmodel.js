@@ -19,7 +19,7 @@ drawUpdateHistory = function (udateh) {
     for (var i = 0; i < uh.entries.length; i++) {
         items.add([{ id: i, content: uh.entries[i].evidenceSet.getDisplayText(), start: uh.entries[i].datetime, type: 'point' }]);
     }
-    var options = {"height": "200px", "stackEvents":false};
+    var options = {"height": "200px"};
     var timeline = new vis.Timeline(container, items, options);
 
     timeline.on('click', function (properties) {
@@ -315,21 +315,21 @@ function UpdateHistory(updateHistoryXml) {
                 for (var i = 0; i < this.evidences.length; i++) {
                     if (i != 0)
                         competences += ",";
-                    competences+="(" + this.evidences[i].competenceid + "," + this.evidences[i].getUpdateInfoToDisplay()+")";
+                    competences+="(" + this.evidences[i].id + "," + this.evidences[i].getUpdateInfoToDisplay()+")";
                 }
                 return "Competence update ["+competences+"]";
             }
             if (type == "Activity") {
                 var activities = []
                 for (var i = 0; i < this.evidences.length; i++) {
-                    activities.push(this.evidences[i].activityid);
+                    activities.push(this.evidences[i].id);
                 }
                 return "Activity update [" + activities.toString() + "]";
             }
             if (type == "Gamesituation") {
                 var gs = ""
                 for (var i = 0; i < this.evidences.length; i++) {
-                    ga += "(" + this.evidences[i].gamesituationid + "," + this.evidences[i].getUpdateInfoToDisplay() + ")";
+                    ga += "(" + this.evidences[i].id + "," + this.evidences[i].getUpdateInfoToDisplay() + ")";
                 }
                 return "Gamesituation update [" + competences + "]";
             }
@@ -339,22 +339,21 @@ function UpdateHistory(updateHistoryXml) {
 
     function Evidence(dataInput) {
         this.type;
-        this.competenceid;
+        this.id;
         this.power;
         this.direction;
-        this.gamesituationid;
-        this.activityid;
         this.initialize = function (data) {
 
             this.type = $(data).find("type").html();
             if (this.type == "Competence") {
-                this.competenceid = $(data).find("competenceid").html();
+                this.id = $(data).find("id").html();
                 this.power = $(data).find("power").html();
                 this.direction = $(data).find("direction").html();
             } else if (this.type == "Activity") {
-                this.activityid = $(data).find("activity").html();
+                this.id = $(data).find("id").html();
             } else if (this.type == "Gamesituation") {
-                this.gamesituationid = $(data).find("gamesituation").html();
+                this.id = $(data).find("id").html();
+                this.direction = $(data).find("direction").html();
             }
         };
         this.initialize(dataInput);

@@ -96,7 +96,7 @@ namespace CBKST
                 if (evidence.type == EvidenceType.Competence)
                 {
                     //update based on a competence
-                    competenceIdList.Add(evidence.competenceId);
+                    competenceIdList.Add(evidence.id);
                     evidenceDirectionList.Add(evidence.direction);
                     evidencePowerList.Add(evidence.evidencePower);
                 }else if(evidence.type == EvidenceType.Activity)
@@ -104,10 +104,10 @@ namespace CBKST
                     //update based on an activity mapping
                     if(am.mapping == null)
                         throw new Exception("Activity mapping not found in domain model while updating based on an activity!");
-                    if (!am.mapping.ContainsKey(evidence.activity))
-                        throw new Exception("The received activity " + evidence.activity + " is not included in the activity mapping in the domain model!");
+                    if (!am.mapping.ContainsKey(evidence.id))
+                        throw new Exception("The received activity " + evidence.id + " is not included in the activity mapping in the domain model!");
 
-                    Dictionary<String, String[]> competencesToUpdate = am.mapping[evidence.activity];
+                    Dictionary<String, String[]> competencesToUpdate = am.mapping[evidence.id];
 
                     foreach (String competence in competencesToUpdate.Keys)
                     {
@@ -136,10 +136,10 @@ namespace CBKST
 
                     Dictionary<String, String> competencesToUpdate;
                     Dictionary<String, Dictionary<String, String>> mapping = evidence.direction ? gsm.mappingUp : gsm.mappingDown;
-                    if (!mapping.ContainsKey(evidence.gamesituationId))
-                        throw new Exception("The received gamesituation id " + evidence.gamesituationId + " is not included in the gamesituation mapping in the domain model!");
+                    if (!mapping.ContainsKey(evidence.id))
+                        throw new Exception("The received gamesituation id " + evidence.id + " is not included in the gamesituation mapping in the domain model!");
 
-                    competencesToUpdate = mapping[evidence.gamesituationId];
+                    competencesToUpdate = mapping[evidence.id];
                     foreach (String competence in competencesToUpdate.Keys)
                     {
                         competenceIdList.Add(competence);

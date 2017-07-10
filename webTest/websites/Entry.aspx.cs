@@ -37,7 +37,7 @@ namespace competenceservice
         protected void Page_Load(object sender, EventArgs e)
         {
             //tmp automatic redirect view competence state:
-            Response.Redirect("enter_testdata.aspx");
+            //Response.Redirect("enter_testdata.aspx");
         }
 
 

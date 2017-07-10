@@ -184,6 +184,15 @@ namespace webTest.websites {
         protected global::System.Web.UI.WebControls.TextBox updatecstid;
         
         /// <summary>
+        /// datetimeupdate control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox datetimeupdate;
+        
+        /// <summary>
         /// updatecsxml control.
         /// </summary>
         /// <remarks>

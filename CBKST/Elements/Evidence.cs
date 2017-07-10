@@ -45,14 +45,8 @@ namespace CBKST.Elements
         [XmlElement("type")]
         public EvidenceType type;
 
-        [XmlElement("gamesituation")]
-        public string gamesituationId;
-
-        [XmlElement("activity")]
-        public string activity;
-
-        [XmlElement("competenceid")]
-        public string competenceId;
+        [XmlElement("id")]
+        public string id;
 
         //if true->upgrade, else downgrade
         [XmlElement("direction")]

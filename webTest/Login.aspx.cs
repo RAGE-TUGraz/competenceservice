@@ -38,8 +38,8 @@ namespace competenceservice
         protected void Page_Load(object sender, EventArgs e)
         {
             //tmp automatic login:
-            FormsAuthentication.RedirectFromLoginPage("rage", true);
-            Response.Redirect("websites/Entry.aspx");
+            //FormsAuthentication.RedirectFromLoginPage("rage", true);
+            //Response.Redirect("websites/Entry.aspx");
         }
 
         protected void btnLogin_Click(object sender, EventArgs e)

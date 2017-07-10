@@ -80,10 +80,29 @@ namespace webTest.websites
         {
             string tid = updatecstid.Text;
             string updatexml = updatecsxml.Text;
-            if (competenceframework.CompetenceFramework.updatecompetencestate(tid, updatexml))
-                updatecsreturn.Text = "Update was successful.";
+            string datetime = datetimeupdate.Text;
+            if (datetime == "" || datetime ==  "JJJJ-MM-DD HH:MM:SS")
+            {
+                if (competenceframework.CompetenceFramework.updatecompetencestate(tid, updatexml))
+                    updatecsreturn.Text = "Update was successful.";
+                else
+                    updatecsreturn.Text = "Update failed.";
+            }
             else
-                updatecsreturn.Text = "Update failed.";
+            {
+                DateTime temp;
+                if (!DateTime.TryParse(datetime, out temp))
+                {
+                    updatecsreturn.Text = "Update failed.";
+                    return;
+                }
+
+                if (competenceframework.CompetenceFramework.updatecompetencestate(tid, updatexml, datetime))
+                    updatecsreturn.Text = "Update was successful.";
+                else
+                    updatecsreturn.Text = "Update failed.";
+            }
+
         }
 
         #region sidenavi
