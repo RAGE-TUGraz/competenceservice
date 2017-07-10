@@ -80,7 +80,10 @@ namespace webTest.websites
         {
             string tid = updatecstid.Text;
             string updatexml = updatecsxml.Text;
-            updatecsreturn.Text = tid + "..." + updatexml;
+            if (competenceframework.CompetenceFramework.updatecompetencestate(tid, updatexml))
+                updatecsreturn.Text = "Update was successful.";
+            else
+                updatecsreturn.Text = "Update failed.";
         }
 
         #region sidenavi
