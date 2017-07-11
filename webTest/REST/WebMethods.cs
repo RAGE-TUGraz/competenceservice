@@ -30,6 +30,8 @@ using competenceframework;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
+using System.Net.Sockets;
 using System.Web;
 
 namespace competenceservice
@@ -155,6 +157,47 @@ namespace competenceservice
             {
                 return returnstring;
             }
+        }
+
+        /// <summary>
+        /// Method for returning the competence probabilities of a player by tracking id
+        /// the format is html + js, such that it can easily be included in a website
+        /// </summary>
+        public static string getcphtmlByTid(string tid)
+        {
+            //get domainmodel
+            string competenceProbabilities = CompetenceFramework.getcpByTid(tid);
+            if (competenceProbabilities == null)
+            {
+                return "<failure/>";
+            }
+
+            string dmid = competenceframework.CompetenceFramework.getDomainModelIdByTrackingId(tid);
+            string dmstring = competenceframework.CompetenceFramework.getdm(dmid);
+
+
+            //http://localhost:54059/rest/competenceservice/getcompetencestatehtml/1
+            string ipaddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
+            ipaddress = "http://ec2-54-149-218-203.us-west-2.compute.amazonaws.com";
+            string pathToJsFiles = ipaddress + "/websites/js";
+
+            string dm = "\"" + dmstring.Replace("\"", "'") + "\"";
+            string cp = "\"" + competenceProbabilities.Replace("\"", "'") + "\"";
+            string updateHistory = "\"" + CompetenceFramework.getTrackingHistory(tid).Replace("\"", "'") + "\"";
+            string html = "";
+            html += "<div id='visualizationdiv'><div id ='timelinediv'><h3>Timeline:</h3><div id ='visualization'></div >";
+            html += "</div><div id='graphdiv'><h3>Graph representation:</h3><div id='graphwrapperdiv'><div id='graph'></div>";
+            html += "<div id ='nodeInfo'></div></div></div></div>\n";
+            html += "<script src='"+ pathToJsFiles + "/vis.js'></script>\n";
+            html += "<script src='" + pathToJsFiles + "/graph.js'></script>\n";
+            html += "<script src='" + pathToJsFiles + "/raphael-min.js'></script>\n";
+            html += "<script src='" + pathToJsFiles + "/domainmodel.js'></script>\n";
+            html += "<script src='" + pathToJsFiles + "/jquery-3.2.1.min.js'></script>\n";
+            html += "<script src='" + pathToJsFiles + "/viewcompetencestate.js'></script>\n";
+            html += "<script>drawDomainModel(" + dm + "); drawCompetenceState(" + cp + ");drawUpdateHistory(" + updateHistory + ");</script>";
+
+            
+            return html;
         }
 
         #endregion

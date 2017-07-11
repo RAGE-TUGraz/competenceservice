@@ -99,7 +99,11 @@ namespace competenceservice
             /// </summary>
             Get["/getcompetencestate/{tid}"] = data => WebMethods.getcpByTid(data.tid);
 
-
+            /// <summary>
+            /// Method for returning the competence probabilities of a player by tracking id
+            /// the format is html + js, such that it can easily be included in a website
+            /// </summary>
+            Get["/getcompetencestatehtml/{tid}"] = data => WebMethods.getcphtmlByTid(data.tid);
 
             #endregion
 
