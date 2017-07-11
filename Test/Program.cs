@@ -39,7 +39,7 @@ namespace Test
             //CompetenceFramework.setDatabaseAccessData(null, "testdb", null, null);
             TestCases tc = new TestCases();
             tc.Initialize();
-            tc.test06();
+            tc.test01();
 
             Console.ReadLine();
 		}

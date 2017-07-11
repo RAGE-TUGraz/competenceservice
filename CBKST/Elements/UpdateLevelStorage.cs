@@ -52,13 +52,38 @@ namespace CBKST.Elements
 				foreach (UpdateLevel ul in dm.updateLevels.updateLevelList)
 				{
 					ULevel newLevel = new ULevel();
-					newLevel.maxonelevel = ul.maxonelevel.Equals("true") ? true : false;
-					newLevel.minonecompetence = ul.minonecompetence.Equals("true") ? true : false;
-					newLevel.xi = Double.Parse(ul.xi);
-					EvidencePower power = (ul.power.Equals("low")) ? EvidencePower.Low : (ul.power.Equals("medium")) ? EvidencePower.Medium : EvidencePower.High;
-					if (ul.direction.Equals("up"))
+                    if (ul.maxonelevel.Equals("true", StringComparison.OrdinalIgnoreCase))
+                        newLevel.maxonelevel = true;
+                    else if (ul.maxonelevel.Equals("false", StringComparison.OrdinalIgnoreCase))
+                        newLevel.maxonelevel = false;
+                    else
+                        throw new Exception();
+
+                    if (ul.minonecompetence.Equals("true", StringComparison.OrdinalIgnoreCase))
+                        newLevel.minonecompetence = true;
+                    else if (ul.minonecompetence.Equals("false", StringComparison.OrdinalIgnoreCase))
+                        newLevel.minonecompetence = false;
+                    else
+                        throw new Exception();
+
+
+                    if (!Double.TryParse(ul.xi, out newLevel.xi))
+                        throw new Exception();
+
+                    EvidencePower power;
+                    if (ul.power.Equals("low", StringComparison.OrdinalIgnoreCase))
+                        power = EvidencePower.Low;
+                    else if (ul.power.Equals("medium", StringComparison.OrdinalIgnoreCase))
+                        power = EvidencePower.Medium;
+                    else if (ul.power.Equals("high", StringComparison.OrdinalIgnoreCase))
+                        power = EvidencePower.High;
+                    else
+                        throw new Exception();
+
+                    
+					if (ul.direction.Equals("up", StringComparison.OrdinalIgnoreCase))
 						up.Add(power, newLevel);
-					else if (ul.direction.Equals("down"))
+					else if (ul.direction.Equals("down", StringComparison.OrdinalIgnoreCase))
 						down.Add(power, newLevel);
 				}
 

@@ -136,7 +136,7 @@ namespace UnitTestCompetenceservice
 
             //performing an update for competence 'C1'
             Console.WriteLine("PERFORMING UPDATE BASED ON COMPETENCE ID (C1-MEDIUM-UP)");
-            string evidence = "<evidenceset><evidence><type>Competence</type><competenceid>C1</competenceid><direction>true</direction><power>Medium</power></evidence></evidenceset>";
+            string evidence = "<evidenceset><evidence><type>Competence</type><id>C1</id><direction>true</direction><power>Medium</power></evidence></evidenceset>";
             if (!CompetenceFramework.updatecompetencestate(trackingid, evidence))
                 throw new Exception("Update unsuccessful");
 
@@ -168,7 +168,7 @@ namespace UnitTestCompetenceservice
 
             //performing an update for competence 'C1'
             Console.WriteLine("PERFORMING UPDATE BASED ON ACTIVITY (C1-MEDIUM-UP)");
-            string evidence = "<evidenceset><evidence><type>Activity</type><activity>activityc1</activity></evidence></evidenceset>";
+            string evidence = "<evidenceset><evidence><type>Activity</type><id>activityc1</id></evidence></evidenceset>";
             if(!CompetenceFramework.updatecompetencestate(trackingid, evidence))
                 throw new Exception("Update unsuccessful");
 
@@ -200,7 +200,7 @@ namespace UnitTestCompetenceservice
 
             //performing an update for competence 'C1'
             Console.WriteLine("PERFORMING UPDATE BASED ON GAMESITUATION (C1-MEDIUM-UP)");
-            string evidence = "<evidenceset><evidence><type>Gamesituation</type><gamesituation>gs1</gamesituation><direction>true</direction></evidence></evidenceset>";
+            string evidence = "<evidenceset><evidence><type>Gamesituation</type><id>gs1</id><direction>true</direction></evidence></evidenceset>";
             if(!CompetenceFramework.updatecompetencestate(trackingid, evidence))
                 throw new Exception("Update unsuccessful");
 
@@ -300,7 +300,7 @@ namespace UnitTestCompetenceservice
 
             //performing an update for competence 'C1'
             Console.WriteLine("PERFORMING UPDATE BASED ON COMPETENCE ID (C1-MEDIUM-UP)");
-            string evidence = "<evidenceset><evidence><type>Competence</type><competenceid>C1</competenceid><direction>true</direction><power>Medium</power></evidence></evidenceset>";
+            string evidence = "<evidenceset><evidence><type>Competence</type><id>C1</id><direction>true</direction><power>Medium</power></evidence></evidenceset>";
             makeRESTcall(urlprefix + "/updatecompetencestate/" + trackingid, "POST", evidence);
 
             //requesting the competence probabilities
@@ -332,7 +332,7 @@ namespace UnitTestCompetenceservice
 
             //performing an update for competence 'C1'
             Console.WriteLine("PERFORMING UPDATE BASED ON ACTIVITY (C1-MEDIUM-UP)");
-            string evidence = "<evidenceset><evidence><type>Activity</type><activity>activityc1</activity></evidence></evidenceset>";
+            string evidence = "<evidenceset><evidence><type>Activity</type><id>activityc1</id></evidence></evidenceset>";
             makeRESTcall(urlprefix + "/updatecompetencestate/" + trackingid, "POST", evidence);
 
             //requesting the competence probabilities
@@ -363,7 +363,7 @@ namespace UnitTestCompetenceservice
 
             //performing an update for competence 'C1'
             Console.WriteLine("PERFORMING UPDATE BASED ON GAMESITUATION (C1-MEDIUM-UP)");
-            string evidence = "<evidenceset><evidence><type>Gamesituation</type><gamesituation>gs1</gamesituation><direction>true</direction></evidence></evidenceset>";
+            string evidence = "<evidenceset><evidence><type>Gamesituation</type><id>gs1</id><direction>true</direction></evidence></evidenceset>";
             makeRESTcall(urlprefix + "/updatecompetencestate/" + trackingid, "POST", evidence);
 
             //requesting the competence probabilities

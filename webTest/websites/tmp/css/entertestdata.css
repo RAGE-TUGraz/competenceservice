@@ -1,0 +1,59 @@
+#headingdiv {
+    font-size: 300%;
+    width: 100%;
+    text-align: center;
+    background-color: lightgrey;
+    padding: 3px;
+}
+
+#wrapper {
+    width: 100%;
+    overflow: hidden;
+}
+
+#wrapper2 {
+    width: 100%;
+    overflow: hidden;
+}
+
+#methodinfo {
+    overflow: hidden;
+}
+
+#firstdiv {
+    width: 400px;
+    float: left;
+}
+
+#seconddiv {
+    padding: 20px;
+    overflow: hidden;
+    border: solid 1px black;
+}
+
+#methodchoice {
+    width: 400px;
+    float: left;
+}
+
+#methodinfo{
+    padding:20px;
+}
+
+#methodchoice{
+    padding:20px;
+}
+
+.methoddiv{
+    padding:20px;
+}
+
+.url {
+    font-size: 80%;
+    font-weight: bold;
+}
+
+td{
+    padding: 5px 25px 5px 5px;
+}
+

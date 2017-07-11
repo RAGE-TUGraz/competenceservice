@@ -71,12 +71,20 @@ namespace CBKST.Elements
 
 		public static CompetenceProbabilities getCPFromXmlString(String str)
 		{
-			XmlSerializer serializer = new XmlSerializer(typeof(CompetenceProbabilities));
-			using (TextReader reader = new StringReader(str))
-			{
-				CompetenceProbabilities result = (CompetenceProbabilities)serializer.Deserialize(reader);
-				return (result);
-			}
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(CompetenceProbabilities));
+                using (TextReader reader = new StringReader(str))
+                {
+                    CompetenceProbabilities result = (CompetenceProbabilities)serializer.Deserialize(reader);
+                    return (result);
+                }
+            }
+            catch
+            {
+                return null;
+            }
+
 		}
 
 		public String toXmlString()

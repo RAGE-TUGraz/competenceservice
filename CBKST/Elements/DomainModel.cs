@@ -79,6 +79,8 @@ namespace CBKST.Elements
                 using (TextReader reader = new StringReader(str))
                 {
                     DomainModel result = (DomainModel)serializer.Deserialize(reader);
+                    if (!result.isValid())
+                        throw new Exception("Validation failed!");
                     return (result);
                 }
             }catch(Exception e)
@@ -107,6 +109,52 @@ namespace CBKST.Elements
 				throw new Exception("An error occurred", ex);
 			}
 		}
+
+        public bool containsCompetence(string competenceid)
+        {
+            int compcount = elements.competences.competenceList.Count;
+            foreach (CompetenceDesc comp in elements.competences.competenceList)
+            {
+                if (comp.id.Equals(competenceid))
+                    return true;
+            }
+
+            return false;
+        }
+
+        /// <summary>
+        /// Method for checking dm validity: 
+        /// - activities, gamesituations contain only known competences
+        /// </summary>
+        /// <returns></returns>
+        private bool isValid()
+        {
+            //activities conatain only known competences
+            foreach(ActivitiesRelation ar in relations.activities.activities)
+            {
+                foreach(CompetenceActivity ca in ar.competences)
+                {
+                    if (!containsCompetence(ca.id))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            //gamesituations conatain only known competences
+            foreach (SituationRelation sr in relations.situations.situations)
+            {
+                foreach (CompetenceSituation cs in sr.competences)
+                {
+                    if (!containsCompetence(cs.id))
+                    {
+                        return false;
+                    }
+                }
+            }
+
+            return true;
+        }
 
 		#endregion Methods
 	}

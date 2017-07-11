@@ -128,10 +128,14 @@ namespace competenceframework
                 return false;
 
             //perform update
+            EvidenceSet es = EvidenceSet.getESFromXmlString(evidence);
+            if (es == null)
+                return false;
             DomainModel dm = DomainModel.getDMFromXmlString(dmstring);
             CompetenceProbabilities cp = CompetenceProbabilities.getCPFromXmlString(cpstring);
-            EvidenceSet es = EvidenceSet.getESFromXmlString(evidence);
             CompetenceProbabilities newcp = CompetenceHandler.Instance.updateCompetenceState(dm, cp, es);
+            if (newcp == null)
+                return false;
 
 
             //store cs
@@ -228,10 +232,14 @@ namespace competenceframework
                 return false;
 
             //perform update
+            EvidenceSet es = EvidenceSet.getESFromXmlString(evidence);
+            if (es == null)
+                return false;
             DomainModel dm = DomainModel.getDMFromXmlString(dmstring);
             CompetenceProbabilities cp = CompetenceProbabilities.getCPFromXmlString(cpstring);
-            EvidenceSet es = EvidenceSet.getESFromXmlString(evidence);
             CompetenceProbabilities newcp = CompetenceHandler.Instance.updateCompetenceState(dm,cp,es);
+            if (newcp == null)
+                return false;
 
            
             //store cs

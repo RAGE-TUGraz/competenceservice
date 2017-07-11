@@ -50,7 +50,23 @@ namespace webTest.websites
         public void gettidClicked(object sender, EventArgs args)
         {
             string dmid = dmidfortid.Text;
-            string tid = competenceframework.CompetenceFramework.createtrackingid(dmid);
+            string datetime = datetimetid.Text;
+            string tid;
+            if(datetime.Equals("") || datetime.Equals("JJJJ-MM-DD HH:MM:SS"))
+            {
+                tid = competenceframework.CompetenceFramework.createtrackingid(dmid);
+            }
+            else
+            {
+                DateTime temp;
+                if (!DateTime.TryParse(datetime, out temp))
+                {
+                    gettidreturn.Text = "Update failed. (Supplied datetime unsuitable)";
+                    return;
+                }
+
+                tid = competenceframework.CompetenceFramework.createtrackingid(dmid,datetime);
+            }
             if (tid == null)
                 gettidreturn.Text = "Unable to create tracking id to domain model id '"+dmid+"'";
             else
@@ -93,7 +109,7 @@ namespace webTest.websites
                 DateTime temp;
                 if (!DateTime.TryParse(datetime, out temp))
                 {
-                    updatecsreturn.Text = "Update failed.";
+                    updatecsreturn.Text = "Update failed. (Supplied datetime unsuitable)";
                     return;
                 }
 

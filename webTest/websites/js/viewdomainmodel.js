@@ -1,4 +1,4 @@
-showVisualisation = function () {
+﻿showVisualisation = function () {
     document.getElementById("visualizationdiv").style.display = 'block';
 }
 

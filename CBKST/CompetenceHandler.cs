@@ -96,6 +96,11 @@ namespace CBKST
                 if (evidence.type == EvidenceType.Competence)
                 {
                     //update based on a competence
+                    if (!domainModel.containsCompetence(evidence.id))
+                    {
+                        return null;
+                        //throw new Exception("Competence id for update unknown!");
+                    }
                     competenceIdList.Add(evidence.id);
                     evidenceDirectionList.Add(evidence.direction);
                     evidencePowerList.Add(evidence.evidencePower);
@@ -103,9 +108,15 @@ namespace CBKST
                 {
                     //update based on an activity mapping
                     if(am.mapping == null)
-                        throw new Exception("Activity mapping not found in domain model while updating based on an activity!");
+                    {
+                        return null;
+                        //throw new Exception("Activity mapping not found in domain model while updating based on an activity!");
+                    }
                     if (!am.mapping.ContainsKey(evidence.id))
-                        throw new Exception("The received activity " + evidence.id + " is not included in the activity mapping in the domain model!");
+                    {
+                        return null;
+                        //throw new Exception("The received activity " + evidence.id + " is not included in the activity mapping in the domain model!");
+                    }
 
                     Dictionary<String, String[]> competencesToUpdate = am.mapping[evidence.id];
 
@@ -118,13 +129,26 @@ namespace CBKST
                             case "low": evidencePowerList.Add(EvidencePower.Low); break;
                             case "medium": evidencePowerList.Add(EvidencePower.Medium); break;
                             case "high": evidencePowerList.Add(EvidencePower.High); break;
-                            default: throw new Exception("UpdateLevel '"+ ULevelDirection[0] + "' unknown! (low/medium/high)");
+                            case "Low": evidencePowerList.Add(EvidencePower.Low); break;
+                            case "Medium": evidencePowerList.Add(EvidencePower.Medium); break;
+                            case "High": evidencePowerList.Add(EvidencePower.High); break;
+                            default:
+                                {
+                                    return null;
+                                    //throw new Exception("UpdateLevel '" + ULevelDirection[0] + "' unknown! (low/medium/high)");
+                                }
                         }
                         switch (ULevelDirection[1])
                         {
                             case "up": evidenceDirectionList.Add(true); break;
                             case "down": evidenceDirectionList.Add(false); break;
-                            default: throw new Exception("Updatedirection '"+ ULevelDirection[1] + "' unknown! (up/down)");
+                            case "Up": evidenceDirectionList.Add(true); break;
+                            case "Down": evidenceDirectionList.Add(false); break;
+                            default:
+                                {
+                                    return null;
+                                    //throw new Exception("Updatedirection '" + ULevelDirection[1] + "' unknown! (up/down)");
+                                }
                         }
                     }
                 }
@@ -132,12 +156,18 @@ namespace CBKST
                 {
                     //update based on a gamesituation
                     if (gsm.mappingDown == null || gsm.mappingUp == null)
-                        throw new Exception("Gamesituation mapping not found in domain model while updating based on a gamesituation!");
+                    {
+                        return null;
+                        //throw new Exception("Gamesituation mapping not found in domain model while updating based on a gamesituation!");
+                    }
 
                     Dictionary<String, String> competencesToUpdate;
                     Dictionary<String, Dictionary<String, String>> mapping = evidence.direction ? gsm.mappingUp : gsm.mappingDown;
                     if (!mapping.ContainsKey(evidence.id))
-                        throw new Exception("The received gamesituation id " + evidence.id + " is not included in the gamesituation mapping in the domain model!");
+                    {
+                        return null;
+                        //throw new Exception("The received gamesituation id " + evidence.id + " is not included in the gamesituation mapping in the domain model!");
+                    }
 
                     competencesToUpdate = mapping[evidence.id];
                     foreach (String competence in competencesToUpdate.Keys)
@@ -149,22 +179,40 @@ namespace CBKST
                             case "low": evidencePowerList.Add(EvidencePower.Low); break;
                             case "medium": evidencePowerList.Add(EvidencePower.Medium); break;
                             case "high": evidencePowerList.Add(EvidencePower.High); break;
-                            default: throw new Exception("UpdateLevel unknown!");
+                            case "Low": evidencePowerList.Add(EvidencePower.Low); break;
+                            case "Medium": evidencePowerList.Add(EvidencePower.Medium); break;
+                            case "High": evidencePowerList.Add(EvidencePower.High); break;
+                            default:
+                                {
+                                    return null;
+                                    //throw new Exception("UpdateLevel unknown!");
+                                }
                         }
                         evidenceDirectionList.Add(evidence.direction);
                     }
                 }
                 else
                 {
-                    throw new Exception("Evidence type not specified correctly! (Competence/Activity/Gamesituation)");
+                    return null;
+                    //throw new Exception("Evidence type not specified correctly! (Competence/Activity/Gamesituation)");
                 }
             }
 
-            UpdateLevelStorage uls = new UpdateLevelStorage(domainModel);
+            UpdateLevelStorage uls;
+            try
+            {
+                uls = new UpdateLevelStorage(domainModel);
+            }
+            catch
+            {
+                return null;
+            }
+            
 
             //the update
             CompetenceProbabilities cpnew =  competenceStructure.updateCompetenceState(competenceProbabilities, competenceIdList, evidenceDirectionList, evidencePowerList, uls);
-
+            if (cpnew == null)
+                return null;
 
             return cpnew;
         }

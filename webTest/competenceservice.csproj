@@ -71,9 +71,28 @@
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
+    <Content Include="websites\css\enterdomainmodel.css" />
+    <Content Include="websites\css\entertestdata.css" />
+    <Content Include="websites\css\general.css" />
+    <Content Include="websites\css\login.css" />
+    <Content Include="websites\css\menu.css" />
+    <Content Include="websites\css\styleEntry.css" />
+    <Content Include="websites\css\viewcompetencestate.css" />
+    <Content Include="websites\css\viewdomainmodel.css" />
+    <Content Include="websites\css\vis.css" />
     <Content Include="websites\Entry.aspx" />
     <Content Include="packages.config" />
     <Content Include="websites\enter_domainmodel.aspx" />
+    <Content Include="websites\images\tabpic.ico" />
+    <Content Include="websites\js\domainmodel.js" />
+    <Content Include="websites\js\entertestdata.js" />
+    <Content Include="websites\js\entryTooltip.js" />
+    <Content Include="websites\js\graph.js" />
+    <Content Include="websites\js\menu.js" />
+    <Content Include="websites\js\raphael-min.js" />
+    <Content Include="websites\js\viewcompetencestate.js" />
+    <Content Include="websites\js\viewdomainmodel.js" />
+    <Content Include="websites\js\vis.js" />
     <Content Include="websites\view_competencestate.aspx" />
     <Content Include="websites\enter_testdata.aspx" />
     <Content Include="websites\view_domainmodel.aspx" />
@@ -138,7 +157,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="CustomProfile.pubxml" />
+    <Content Include="websites\js\jquery-3.2.1.min.js" />
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

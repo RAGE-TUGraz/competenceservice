@@ -207,7 +207,10 @@ namespace CBKST.Elements
                 if (getCompetenceById(competenceProbability.id) != null)
                     cs.setCompetenceValue(getCompetenceById(competenceProbability.id), competenceProbability.value);
                 else
-                    throw new Exception("A supplied competence probability id do not match a domain model competence id!");
+                {
+                    return null;
+                    //throw new Exception("A supplied competence probability id do not match a domain model competence id!");
+                }
             }
 
             updateCompetenceState(cs, compList, evidenceList, evidencePowers, uls);

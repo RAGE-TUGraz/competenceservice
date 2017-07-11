@@ -61,12 +61,20 @@ namespace CBKST.Elements
 
         public static EvidenceSet getESFromXmlString(String str)
         {
-            XmlSerializer serializer = new XmlSerializer(typeof(EvidenceSet));
-            using (TextReader reader = new StringReader(str))
+            try
             {
-                EvidenceSet result = (EvidenceSet)serializer.Deserialize(reader);
-                return (result);
+                XmlSerializer serializer = new XmlSerializer(typeof(EvidenceSet));
+                using (TextReader reader = new StringReader(str))
+                {
+                    EvidenceSet result = (EvidenceSet)serializer.Deserialize(reader);
+                    return (result);
+                }
             }
+            catch 
+            {
+                return null;
+            }
+
         }
 
         public String toXmlString()
