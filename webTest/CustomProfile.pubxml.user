@@ -10,10 +10,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/CBKST.dll">
-      <publishTime>07/12/2017 09:40:05</publishTime>
+      <publishTime>07/12/2017 10:20:16</publishTime>
     </File>
     <File Include="bin/competenceframework.dll">
-      <publishTime>07/12/2017 09:40:06</publishTime>
+      <publishTime>07/12/2017 10:20:16</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>06/17/2016 18:28:04</publishTime>
@@ -25,10 +25,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/21/2015 11:59:12</publishTime>
     </File>
     <File Include="bin/Nancy.Hosting.Aspnet.dll">
-      <publishTime>05/11/2015 14:40:52</publishTime>
+      <publishTime>11/05/2015 14:40:52</publishTime>
     </File>
     <File Include="bin/storagedb.dll">
-      <publishTime>07/12/2017 09:40:06</publishTime>
+      <publishTime>07/12/2017 10:20:16</publishTime>
     </File>
     <File Include="bin/StructureMap.dll">
       <publishTime>12/14/2015 06:42:18</publishTime>
@@ -37,7 +37,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2015 06:42:18</publishTime>
     </File>
     <File Include="bin/webTest.dll">
-      <publishTime>07/12/2017 09:40:06</publishTime>
+      <publishTime>07/12/2017 10:20:17</publishTime>
     </File>
     <File Include="Default.aspx">
       <publishTime>07/03/2017 08:45:13</publishTime>
@@ -46,7 +46,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>03/20/2017 09:06:19</publishTime>
     </File>
     <File Include="Login.aspx">
-      <publishTime>05/07/2017 11:53:09</publishTime>
+      <publishTime>07/05/2017 11:53:09</publishTime>
     </File>
     <File Include="packages.config">
       <publishTime>04/24/2017 09:21:45</publishTime>
@@ -97,10 +97,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/10/2017 08:48:31</publishTime>
     </File>
     <File Include="websites/images/tabpic.ico">
-      <publishTime>05/07/2017 11:51:42</publishTime>
+      <publishTime>07/05/2017 11:51:42</publishTime>
     </File>
     <File Include="websites/js/domainmodel.js">
-      <publishTime>07/11/2017 10:47:28</publishTime>
+      <publishTime>07/12/2017 10:17:15</publishTime>
     </File>
     <File Include="websites/js/entertestdata.js">
       <publishTime>07/11/2017 11:14:09</publishTime>

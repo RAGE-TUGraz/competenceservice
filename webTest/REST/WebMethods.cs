@@ -177,9 +177,7 @@ namespace competenceservice
 
             
             //http://localhost:54059/rest/competenceservice/getcompetencestatehtml/1
-            string ipaddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
-            string ip2 = HttpContext.Current.Request.Url.Authority;
-            ipaddress = ip2;// "http://ec2-54-149-218-203.us-west-2.compute.amazonaws.com";
+            string ipaddress = HttpContext.Current.Request.Url.Authority;
             string  pathToJsFiles = "http://" + ipaddress + "/websites/js";
             string pathToCssFiles = "http://" + ipaddress + "/websites/css";
 
@@ -196,14 +194,14 @@ namespace competenceservice
             html +=" style='float: left;margin-right: 10px;width: 300px;height: 400px;border: solid 1px black;'></div>";
             html += "<div id ='nodeInfo' style='overflow: hidden;width: 300px;padding: 3px;'></div></div></div></div>\n";
             //include js files
-            html += "<script src='"+ pathToJsFiles + "/vis.js'></script>\n";
+            //html += "<script src='"+ pathToJsFiles + "/vis.js'></script>\n";
             html += "<script src='" + pathToJsFiles + "/graph.js'></script>\n";
             html += "<script src='" + pathToJsFiles + "/raphael-min.js'></script>\n";
             html += "<script src='" + pathToJsFiles + "/domainmodel.js'></script>\n";
             html += "<script src='" + pathToJsFiles + "/jquery-3.2.1.min.js'></script>\n";
             html += "<script src='" + pathToJsFiles + "/viewcompetencestate.js'></script>\n";
             //visualize data
-            html += "<script>drawDomainModel(" + dm + ");\n drawCompetenceState(" + cp + ");\n drawUpdateHistory(" + updateHistory + ");\n</script>";
+            html += "<script>drawDomainModel(" + dm + ");\n drawCompetenceState(" + cp + ");\n drawUpdateHistory(" + updateHistory + ");\n timeline.redraw();\n</script>";
 
             
             return html;

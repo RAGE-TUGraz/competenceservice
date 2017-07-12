@@ -20,7 +20,7 @@ drawUpdateHistory = function (udateh) {
         items.add([{ id: i, content: uh.entries[i].evidenceSet.getDisplayText(), start: uh.entries[i].datetime, type: 'point' }]);
     }
     var options = { "height": "200px" };
-    var timeline = new vis.Timeline(container, items, options);
+    timeline = new vis.Timeline(container, items, options);
 
     timeline.on('click', function (properties) {
         if (properties.item != null) {

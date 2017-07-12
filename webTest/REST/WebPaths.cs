@@ -55,11 +55,11 @@ namespace competenceservice
 
                 string[] splits = getUsernameAndPwdFromRequest(Request);
                 if(splits.Length<2)
-                    return "<failure> authentification failed1 </failure>";
+                    return "<failure> authentification failed (1) </failure>";
                 string username = splits[0];
                 string password = splits[1];
                 if(!CompetenceFramework.isUserValid(username, password))
-                    return "<failure> authentification failed2 </failure>";
+                    return "<failure> authentification failed (2) </failure>";
 
                 return null;
             };
@@ -104,6 +104,18 @@ namespace competenceservice
             /// the format is html + js, such that it can easily be included in a website
             /// </summary>
             Get["/getcompetencestatehtml/{tid}"] = data => WebMethods.getcphtmlByTid(data.tid);
+
+            /*
+            After.AddItemToEndOfPipeline((ctx) => ctx.Response
+                .WithHeader("Access-Control-Allow-Origin", "*")
+                .WithHeader("Access-Control-Allow-Methods", "GET,POST,DELETE")
+                .WithHeader("Access-Control-Allow-Credentials", "true")
+                .WithHeader("Access-Control-Allow-Headers", "Authorization, Accept, Origin, Content-type"));
+            */
+
+            After += (ctx) => {
+                //Response.AddHeader("Access-Control-Allow-Credentials", "true");
+            };
 
             #endregion
 
