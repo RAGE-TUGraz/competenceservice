@@ -18,7 +18,7 @@
         html += "</p>";
     } else if (type == null) {
         html += "<p>";
-        html += "This system allows you to easily incorporate competence assessment and adaptation functionality into your software. Please visit the official <a href=\"http://css-kti.tugraz.at/projects/rage/assets/\">project website</a> for more information.";
+        html += "This system allows you to easily incorporate competence assessment and adaptation functionality into your software. Please visit <a href=\"http://css-kti.tugraz.at/projects/rage/assets/\">this website</a> for more information.";
         html += "</p>";
     } else {
         html = "<h2>ERROR: type unknown.</h2>";

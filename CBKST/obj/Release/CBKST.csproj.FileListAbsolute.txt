@@ -2,3 +2,4 @@ C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\CBKST\bin\Release\C
 C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\CBKST\bin\Release\CBKST.pdb
 C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\CBKST\obj\Release\CBKST.dll
 C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\CBKST\obj\Release\CBKST.pdb
+C:\Users\mojaW\Documents\Visual Studio 2017\Projects\webTest\CBKST\obj\Release\CBKST.csprojResolveAssemblyReference.cache

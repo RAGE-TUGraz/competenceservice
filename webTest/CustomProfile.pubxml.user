@@ -10,10 +10,10 @@ by editing this MSBuild file. In order to learn more about this please visit htt
   </PropertyGroup>
   <ItemGroup>
     <File Include="bin/CBKST.dll">
-      <publishTime>07/11/2017 11:38:07</publishTime>
+      <publishTime>07/12/2017 09:40:05</publishTime>
     </File>
     <File Include="bin/competenceframework.dll">
-      <publishTime>07/11/2017 11:38:07</publishTime>
+      <publishTime>07/12/2017 09:40:06</publishTime>
     </File>
     <File Include="bin/MySql.Data.dll">
       <publishTime>06/17/2016 18:28:04</publishTime>
@@ -28,7 +28,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>05/11/2015 14:40:52</publishTime>
     </File>
     <File Include="bin/storagedb.dll">
-      <publishTime>07/11/2017 11:38:07</publishTime>
+      <publishTime>07/12/2017 09:40:06</publishTime>
     </File>
     <File Include="bin/StructureMap.dll">
       <publishTime>12/14/2015 06:42:18</publishTime>
@@ -37,7 +37,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>12/14/2015 06:42:18</publishTime>
     </File>
     <File Include="bin/webTest.dll">
-      <publishTime>07/11/2017 11:38:08</publishTime>
+      <publishTime>07/12/2017 09:40:06</publishTime>
     </File>
     <File Include="Default.aspx">
       <publishTime>07/03/2017 08:45:13</publishTime>
@@ -79,7 +79,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/11/2017 10:55:27</publishTime>
     </File>
     <File Include="websites/css/viewcompetencestate.css">
-      <publishTime>07/11/2017 10:55:48</publishTime>
+      <publishTime>07/12/2017 09:11:30</publishTime>
     </File>
     <File Include="websites/css/viewdomainmodel.css">
       <publishTime>07/11/2017 10:56:07</publishTime>
@@ -106,7 +106,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/11/2017 11:14:09</publishTime>
     </File>
     <File Include="websites/js/entryTooltip.js">
-      <publishTime>07/11/2017 11:29:13</publishTime>
+      <publishTime>07/11/2017 12:27:11</publishTime>
     </File>
     <File Include="websites/js/graph.js">
       <publishTime>07/11/2017 10:49:03</publishTime>
@@ -136,7 +136,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>07/11/2017 10:40:43</publishTime>
     </File>
     <File Include="websites/view_competencestate.aspx">
-      <publishTime>07/10/2017 08:48:31</publishTime>
+      <publishTime>07/11/2017 14:59:58</publishTime>
     </File>
     <File Include="websites/view_domainmodel.aspx">
       <publishTime>07/10/2017 08:48:30</publishTime>

@@ -175,26 +175,35 @@ namespace competenceservice
             string dmid = competenceframework.CompetenceFramework.getDomainModelIdByTrackingId(tid);
             string dmstring = competenceframework.CompetenceFramework.getdm(dmid);
 
-
+            
             //http://localhost:54059/rest/competenceservice/getcompetencestatehtml/1
             string ipaddress = Dns.GetHostEntry(Dns.GetHostName()).AddressList.FirstOrDefault(ip => ip.AddressFamily == AddressFamily.InterNetwork).ToString();
-            ipaddress = "http://ec2-54-149-218-203.us-west-2.compute.amazonaws.com";
-            string pathToJsFiles = ipaddress + "/websites/js";
+            string ip2 = HttpContext.Current.Request.Url.Authority;
+            ipaddress = ip2;// "http://ec2-54-149-218-203.us-west-2.compute.amazonaws.com";
+            string  pathToJsFiles = "http://" + ipaddress + "/websites/js";
+            string pathToCssFiles = "http://" + ipaddress + "/websites/css";
 
             string dm = "\"" + dmstring.Replace("\"", "'") + "\"";
             string cp = "\"" + competenceProbabilities.Replace("\"", "'") + "\"";
             string updateHistory = "\"" + CompetenceFramework.getTrackingHistory(tid).Replace("\"", "'") + "\"";
             string html = "";
+            //add script for loading stylesheets from js
+            //html += "<script> var style = document.createElement('link'); style.rel = 'stylesheet'; style.type = 'text/css'; style.href = '"+pathToCssFiles+"/viewcompetencestate.css'; document.getElementsByTagName('head')[0].appendChild(style);</script>\n";
+            html += "<script> var style = document.createElement('link'); style.rel = 'stylesheet'; style.type = 'text/css'; style.href = '" + pathToCssFiles + "/vis.css'; document.getElementsByTagName('head')[0].appendChild(style);</script>\n";
+            //add html code for the visualization
             html += "<div id='visualizationdiv'><div id ='timelinediv'><h3>Timeline:</h3><div id ='visualization'></div >";
-            html += "</div><div id='graphdiv'><h3>Graph representation:</h3><div id='graphwrapperdiv'><div id='graph'></div>";
-            html += "<div id ='nodeInfo'></div></div></div></div>\n";
+            html += "</div><div id='graphdiv'><h3>Graph representation:</h3><div id='graphwrapperdiv'  style='width: 100%;overflow: hidden;'><div id='graph'";
+            html +=" style='float: left;margin-right: 10px;width: 300px;height: 400px;border: solid 1px black;'></div>";
+            html += "<div id ='nodeInfo' style='overflow: hidden;width: 300px;padding: 3px;'></div></div></div></div>\n";
+            //include js files
             html += "<script src='"+ pathToJsFiles + "/vis.js'></script>\n";
             html += "<script src='" + pathToJsFiles + "/graph.js'></script>\n";
             html += "<script src='" + pathToJsFiles + "/raphael-min.js'></script>\n";
             html += "<script src='" + pathToJsFiles + "/domainmodel.js'></script>\n";
             html += "<script src='" + pathToJsFiles + "/jquery-3.2.1.min.js'></script>\n";
             html += "<script src='" + pathToJsFiles + "/viewcompetencestate.js'></script>\n";
-            html += "<script>drawDomainModel(" + dm + "); drawCompetenceState(" + cp + ");drawUpdateHistory(" + updateHistory + ");</script>";
+            //visualize data
+            html += "<script>drawDomainModel(" + dm + ");\n drawCompetenceState(" + cp + ");\n drawUpdateHistory(" + updateHistory + ");\n</script>";
 
             
             return html;

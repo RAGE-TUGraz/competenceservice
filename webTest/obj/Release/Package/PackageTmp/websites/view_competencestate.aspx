@@ -52,6 +52,7 @@
                 <asp:TextBox id="trackingidinput" runat="server" rows="20" />
                 <asp:Button id="loadcs" runat="server" Text="Load"  OnClick="buttonloadcompetenceStateClicked" /><br/>
             </div>
+
             <div id="visualizationdiv">
                 <div id="timelinediv">
                     <h3>Timeline:</h3>
@@ -65,6 +66,7 @@
                     </div>
                 </div>
             </div>
+
         </div>
     </form>
 </body>
